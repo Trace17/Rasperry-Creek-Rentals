@@ -1,0 +1,25 @@
+{
+  "name": "cs340_group50_project",
+  "version": "1.0.0",
+  "description": "CS340 Group 50 Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Trace17/cs340_group50_project.git"
+  },
+  "author": "Trace Sweeney and Brenda Levy",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Trace17/cs340_group50_project/issues"
+  },
+  "homepage": "https://github.com/Trace17/cs340_group50_project#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^6.0.6",
+    "forever": "^4.0.3",
+    "mysql": "^2.18.1"
+  }
+}
