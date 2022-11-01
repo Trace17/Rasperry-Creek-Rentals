@@ -1,0 +1,154 @@
+<html>
+    <head>
+        <title>Bookings</title>
+        <script language="Javascript">
+            function showform(dowhat){
+                if (dowhat == 'insert'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'block';
+                    document.getElementById('delete').style.display = 'none';
+                    document.getElementById('search').style.display = 'none';
+                }
+                else if (dowhat == 'delete'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('delete').style.display = 'block';
+                    document.getElementById('search').style.display = 'none';
+                }
+                else if (dowhat == 'search'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                    document.getElementById('search').style.display = 'block';
+                }
+                else {
+                    document.getElementById('browse').style.display = 'block';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                    document.getElementById('search').style.display = 'none';
+
+                }
+            }
+            
+            function newBooking() { showform('insert');}
+            function deleteBooking(bid) { showform('delete');}
+            function browseBookings() { showform('browse');}
+        </script>
+    </head>
+
+<h1>Bookings</h1>
+
+[ <a href="/">Home Page</a> |
+<a href="/guests">Guests</a> |
+<a href="/rentals">Rentals</a> |
+<a href="/rental_types">Rental Types</a> |
+<a href="/employees">Employees</a> |
+<a href="/bookings">Bookings</a> |
+<a href="/bookings_guests">Guests Bookings</a> ]
+
+<div id="browse" style="display: block">
+    <p><strong>Browse Bookings</strong></p>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th><a href="#" onClick="showform('insert')">New</a></th>
+            <th>id</th>
+            <th>number of guests</th>
+            <th>rental id</th>
+            <th>check in</th>
+            <th>check out</th>
+            <th>total cost</th>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="deleteBooking('this.bookingID')">Delete</a></td>
+            <td>1</td>
+            <td>4</td>
+            <td>1</td>
+            <td>2020-11-19</td>
+            <td>2020-11-27</td>
+            <td>640</td>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="deleteBooking('this.bookingID')">Delete</a></td>
+            <td>2</td>
+            <td>4</td>
+            <td>3</td>
+            <td>2020-06-15</td>
+            <td>2020-06-19</td>
+            <td>320</td> 
+        </tr>
+        <tr>
+            <td><a href="#" onClick="deleteBooking('this.bookingID')">Delete</a></td>
+            <td>3</td>
+            <td>6</td>
+            <td>9</td>
+            <td>2021-1-16</td>
+            <td>2021-1-22</td>
+            <td>90</td>
+        </tr>
+        </table>
+        <a href="#" onClick="showform('search')">Search for a Booking</a>
+    </div>
+
+
+
+
+    <p>&nbsp;</p>
+    <div id="insert" style="display:none">
+        <form method="POST" id="addBooking">
+            <legend><strong>Add Booking</strong></legend>
+                <fieldset class="fields">
+                    <label> number of guests </label> <input type="text" name="number of guests">
+                    <label> rental id </label> <select name="rental type id">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        </select>
+                    <label> check in </label> <input type="date" name="check in">
+                    <label> check out </label> <input type="date" name="check out">
+                    <label> total cost </label> <input type="number" step="any" name="total cost">
+                </fieldset> 
+            <fieldset>
+                <input class="btn" type="submit" id="addBooking" value="Add Booking">
+                <input class="btn" type="button" value="cancel" onClick="browseBookings()">
+            </fieldset>
+        </form>
+    </div>
+
+    <p>&nbsp;</p>
+    <div id="delete" style="display: none">
+        <form id="deleteBooking">
+            <legend><strong>Delete Booking</strong></legend>
+                <fieldset class="fields">
+                <p>Are you sure you want to delete the following Booking?</p>
+                <input type="hidden" name="BookingID" id="deleteBooking">
+                <label> ID: </label> 1
+                <label> number of guests: </label>"4"
+                </fieldset> 
+            <fieldset>
+                <input class="btn" type="submit" id="deleteBooking" value="Delete">
+                <input class="btn" type="button" value="cancel" onClick="browseBookings()">
+            </fieldset>
+        </form>
+    </div>
+    
+
+
+    <p>&nbsp;</p>
+    <div id="search" style="display: none">
+        <form id="searchBooking">
+            <legend><strong>Search for a Booking</strong></legend>
+                <fieldset class="fields">
+                <p>Provide the ID of the booking you are searching for:</p>
+                <label> id </label> <input type="text" name="booking id">
+                </fieldset> 
+            <fieldset>
+                <input class="btn" type="submit" id="searchRentalType" value="Search">
+                <input class="btn" type="button" value="cancel" onClick="browseBookings()">
+            </fieldset>
+        </form>
+    </div>
+
+</body>
+</html>

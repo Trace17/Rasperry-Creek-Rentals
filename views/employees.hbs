@@ -1,0 +1,120 @@
+<html>
+    <head>
+        <title>Rentals</title>
+        <script language="Javascript">
+            function showform(dowhat){
+                if (dowhat == 'insert'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'block';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'delete'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('delete').style.display = 'block';
+                }
+                else {
+                    document.getElementById('browse').style.display = 'block';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                }
+            }
+            
+            function newEmployee() { showform('insert');}
+            function deleteEmployee(eid) { showform('delete');}
+            function browseEmployees() { showform('browse');}
+        </script>
+    </head>
+
+<h1>Employees</h1>
+
+[ <a href="/">Home Page</a> |
+<a href="/guests">Guests</a> |
+<a href="/rentals">Rentals</a> |
+<a href="/rental_types">Rental Types</a> |
+<a href="/employees">Employees</a> |
+<a href="/bookings">Bookings</a> |
+<a href="/bookings_guests">Guests Bookings</a> ]
+
+
+<div id="browse" style="display: block">
+    <p><strong>Browse Employees</strong></p>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th><a href="#" onClick="showform('insert')">New</a></th>
+            <th>id</th>
+            <th>fname</th>
+            <th>lname</th>
+            <th>email</th>
+            <th>phone</th>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="deleteEmployee('this.personID')">Delete</a></td>
+            <td>1</td>
+            <td>Kurt</td>
+            <td>Johnson</td>
+            <td>kjohnson@hello.com</td>
+            <td>5028746639</td>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="deleteEmployee('this.personID')">Delete</a></td>
+            <td>2</td>
+            <td>Samantha</td>
+            <td>Williams</td>
+            <td>sammy432@hello.com</td>
+            <td>7602995493</td>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="deleteEmployee('this.personID')">Delete</a></td>
+            <td>3</td>
+            <td>Val</td>
+            <td>Michaels</td>
+            <td>vmichaels@hello.com</td>
+            <td>7554325647</td> 
+        </tr>
+    </table>
+    </div>
+
+    <p>&nbsp;</p>
+    <div id="insert" style="display:none">
+        <form method="POST" id="addEmployee">
+            <legend><strong>Add Employee</strong></legend>
+                <fieldset class="fields">
+                    <label> first name </label> <input type="text" name="fname">
+                    <label> last name </label> <input type="text" name="lname">
+                    <label> email </label> <input type="text" name="email">
+                    <label> phone </label> <input type="text" name="phone">
+                </fieldset> 
+            <fieldset>
+                <input class="btn" type="submit" id="addEmployee" value="Add Employee">
+                <input class="btn" type="button" value="cancel" onClick="browseEmployees()">
+            </fieldset>
+        </form>
+    </div>
+
+
+
+    <p>&nbsp;</p>
+    <div id="delete" style="display:none">
+        <form id="deleteEmployee">
+            <legend><strong>Delete Employee</strong></legend>
+                <fieldset class="fields">
+                <p>Are you sure you want to delete the following Employee?</p>
+                <input type="hidden" name="EmployeeID" id="deleteEmployee">
+                <label> ID: </label> 1
+                <label> name: </label>"Kurt Johnson"
+                </fieldset> 
+            <fieldset>
+                <input class="btn" type="submit" id="deleteEmployee" value="Delete">
+                <input class="btn" type="button" value="cancel" onClick="browseEmployees()">
+            </fieldset>
+        </form>
+    </div>
+    
+</body>
+</html>
+    
+    
+    
+     
+        

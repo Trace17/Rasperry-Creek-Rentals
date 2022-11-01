@@ -1,0 +1,126 @@
+<html>
+    <head>
+        <title>Rentals</title>
+        <script language="Javascript">
+            function showform(dowhat){
+                if (dowhat == 'insert'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'block';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'update'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'delete'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('delete').style.display = 'block';
+                }
+                else {
+                    document.getElementById('browse').style.display = 'block';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                }
+            }
+            
+            function newRentalType() { showform('insert');}
+            function deleteRentalType(rtid) { showform('delete');}
+            function browseRentalTypes() { showform('browse');}
+        </script>
+    </head>
+
+<h1>Rental Types</h1>
+[ <a href="/">Home Page</a> |
+<a href="/guests">Guests</a> |
+<a href="/rentals">Rentals</a> |
+<a href="/rental_types">Rental Types</a> |
+<a href="/employees">Employees</a> |
+<a href="/bookings">Bookings</a> |
+<a href="/bookings_guests">Guests Bookings</a> ]
+
+<div id="browse" style="display: block">
+    <p><strong>Browse Rental Types</strong></p>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th><a href="#" onClick="showform('insert')">New</a></th>
+            <th>id</th>
+            <th>name</th>
+            <th>year round</th>
+            <th>max occupancy</th>
+            <th>cost per night</th>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="deleteRentalType('this.rentaltypeID')">Delete</a></td>
+            <td>1</td>
+            <td>Yurt</td>
+            <td>yes</td>
+            <td>4</td>
+            <td>80</td>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="deleteRentalType('this.rentaltypeID')">Delete</a></td>
+            <td>2</td>
+            <td>Tiny Home</td>
+            <td>yes</td>
+            <td>4</td>
+            <td>100</td>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="deleteRentalType('this.rentaltypeID')">Delete</a></td>
+            <td>3</td>
+            <td>Bus</td>
+            <td>yes</td>
+            <td>3</td>
+            <td>65</td>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="deleteRentalType('this.rentaltypeID')">Delete</a></td>
+            <td>4</td>
+            <td>Campsite</td>
+            <td>no</td>
+            <td>6</td>
+            <td>15</td>
+        </tr>
+    </table>
+</div>
+
+<p>&nbsp;</p>
+<div id="insert" style="display:none">
+    <form method="POST" id="addRentalType">
+        <legend><strong>Add Rental Type</strong></legend>
+            <fieldset class="fields">
+                <label> name </label> <input type="text" name="name">
+                <label> year round </label> <select name="year round">
+                    <option value="1">yes</option>
+                    <option value="2">summer only</option>
+                    </select>
+                <label> max occupancy </label> <input type="number" name="max occupancy">
+                <label> cost per night </label> <input type="number" step="any" name="cost per night">
+            </fieldset> 
+        <fieldset>
+            <input class="btn" type="submit" id="addRentalType" value="Add Rental Type">
+            <input class="btn" type="button" value="cancel" onClick="browseRentalTypes()">
+        </fieldset>
+    </form>
+</div>
+
+<p>&nbsp;</p>
+<div id="delete" style="display: none">
+    <form id="deleteBooking">
+        <legend><strong>Delete Rental Type</strong></legend>
+            <fieldset class="fields">
+            <p>Are you sure you want to delete the following Rental Type?</p>
+            <input type="hidden" name="RentalTypeID" id="deleteRentalType">
+            <label> ID: </label> 1
+            <label> name: </label>"Yurt"
+            </fieldset> 
+        <fieldset>
+            <input class="btn" type="submit" id="deleteRentalType" value="Delete">
+            <input class="btn" type="button" value="cancel" onClick="browseRentalTypes()">
+        </fieldset>
+    </form>
+</div>
+</body>
+</html>

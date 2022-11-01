@@ -1,0 +1,174 @@
+<html>
+    <head>
+        <title>Rentals</title>
+        <script language="Javascript">
+            function showform(dowhat){
+                if (dowhat == 'insert'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'block';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'update'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'block';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'delete'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'block';
+                }
+                else {
+                    document.getElementById('browse').style.display = 'block';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                }
+            }
+            
+            function newRental() { showform('insert');}
+            function updateRental(gid) { showform('update');}
+            function deleteRental(gid) { showform('delete');}
+            function browseRentals() { showform('browse');}
+        </script>
+    </head>
+
+
+<h1>Rentals</h1>
+
+[ <a href="/">Home Page</a> |
+<a href="/guests">Guests</a> |
+<a href="/rentals">Rentals</a> |
+<a href="/rental_types">Rental Types</a> |
+<a href="/employees">Employees</a> |
+<a href="/bookings">Bookings</a> |
+<a href="/bookings_guests">Guests Bookings</a> ]
+
+<div id="browse" style="display: block">
+    <p><strong>Browse Rentals</strong></p>
+    <table border="1" cellpadding="5">
+        <tr>
+            <th><a href="#" onClick="showform('insert')">New</a></th>
+            <th></th>
+            <th>id</th>
+            <th>name</th>
+            <th>rental type id</th>
+            <th>employee id</th>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="updateRental('this.rentalID')">Edit</a></td>
+            <td><a href="#" onClick="deleteRental('this.rentalID')">Delete</a></td>
+            <td>1</td>
+            <td>Spruce</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="updateRental('this.rentalID')">Edit</a></td>
+            <td><a href="#" onClick="deleteRental('this.rentalID')">Delete</a></td>
+            <td>2</td>
+            <td>Pine</td>
+            <td>1</td>
+            <td>3</td> 
+        </tr>
+        <tr>
+            <td><a href="#" onClick="updateRental('this.rentalID')">Edit</a></td>
+            <td><a href="#" onClick="deleteRental('this.rentalID')">Delete</a></td>
+            <td>3</td>
+            <td>Cedar</td>
+            <td>1</td>
+            <td>1</td>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="updateRental('this.rentalID')">Edit</a></td>
+            <td><a href="#" onClick="deleteRental('this.rentalID')">Delete</a></td>
+            <td>4</td>
+            <td>Blueberry Cottage</td>
+            <td>2</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td><a href="#" onClick="updateRental('this.rentalID')">Edit</a></td>
+            <td><a href="#" onClick="deleteRental('this.rentalID')">Delete</a></td>
+            <td>5</td>
+            <td>Strawberry Cottage</td>
+            <td>2</td>
+            <td>2</td>
+        </tr>
+    </table>
+</div>
+
+<p>&nbsp;</p>
+<div id="insert" style="display:none">
+    <form method="POST" id="addRental">
+        <legend><strong>Add Rental</strong></legend>
+            <fieldset class="fields">
+                <label> name </label> <input type="text" name="fname">
+                <label> rental type id </label> <select name="rental type id">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    </select>
+                <label> employee id </label> <select name="employee id">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    </select>
+            </fieldset> 
+        <fieldset>
+            <input class="btn" type="submit" id="addRental" value="Add Rental">
+            <input class="btn" type="button" value="cancel" onClick="browseRentals()">
+        </fieldset>
+    </form>
+</div>
+
+<p>&nbsp;</p>
+<div id="update" style="display:none">
+    <form method="POST" id="UpdateRental">
+        <legend><strong>Update Rental</strong></legend>
+            <fieldset class="fields">
+            <input type="hidden" name="rentalID" id="updaterentalID" >
+            <label> ID: </label> 1
+            <label> name </label> <input type="text" name="fname" value="Spruce">
+            <label> rental type id </label> <select name="rental type id">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                </select>
+            <label> employee id </label> <select name="employee id">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                </select>
+            </fieldset> 
+        <fieldset>
+            <input class="btn" type="submit" id="addRental" value="Update Rental">
+            <input class="btn" type="button" value="cancel" onClick="browseRentals()">
+        </fieldset>
+    </form>
+</div>
+
+<p>&nbsp;</p>
+<div id="delete" style="display:none">
+    <form id="deleteRental">
+        <legend><strong>Delete Rental</strong></legend>
+            <fieldset class="fields">
+            <p>Are you sure you want to delete the following Rental?</p>
+            <input type="hidden" name="RentalID" id="deleteRental">
+            <label> ID: </label> 1
+            <label> name: </label>"Spruce"
+            </fieldset> 
+        <fieldset>
+            <input class="btn" type="submit" id="deleteRental" value="Delete">
+            <input class="btn" type="button" value="cancel" onClick="browseRentals()">
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>
+ 
+    

@@ -24,6 +24,35 @@ app.get('/', function(req, res)                 // This is the basic syntax for 
         res.render('index'); 
     });                                         // requesting the web site.
 
+app.get('/bookings_guests', function(req, res)                 // This is the basic syntax for what is called a 'route'
+    {
+        res.render('bookings_guests'); 
+    });  
+
+app.get('/bookings', function(req, res)                 // This is the basic syntax for what is called a 'route'
+    {
+        res.render('bookings'); 
+    });    
+
+app.get('/employees', function(req, res)                 // This is the basic syntax for what is called a 'route'
+    {
+        res.render('employees'); 
+    });    
+
+app.get('/guests', function(req, res)                 // This is the basic syntax for what is called a 'route'
+    {
+        res.render('guests'); 
+    });    
+
+app.get('/rental_types', function(req, res)                 // This is the basic syntax for what is called a 'route'
+    {
+        res.render('rental_types'); 
+    });  
+    
+app.get('/rentals', function(req, res)                 // This is the basic syntax for what is called a 'route'
+    {
+        res.render('rentals'); 
+    });    
 /*
     LISTENER
 */

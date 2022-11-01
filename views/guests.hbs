@@ -1,0 +1,157 @@
+<html>
+    <head>
+        <title>Guests</title>
+        <script language="Javascript">
+            function showform(dowhat){
+                if (dowhat == 'insert'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'block';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'update'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'block';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'delete'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'block';
+                }
+                else {
+                    document.getElementById('browse').style.display = 'block';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                }
+            }
+            
+            function newGuest() { showform('insert');}
+            function updateGuest(gid) { showform('update');}
+            function deleteGuest(gid) { showform('delete');}
+            function browseGuests() { showform('browse');}
+        </script>
+    </head>
+
+
+<body>
+<h1>Guests</h1>
+
+[ <a href="/">Home Page</a> |
+<a href="/guests">Guests</a> |
+<a href="/rentals">Rentals</a> |
+<a href="/rental_types">Rental Types</a> |
+<a href="/employees">Employees</a> |
+<a href="/bookings">Bookings</a> |
+<a href="/bookings_guests">Guests Bookings</a> ]
+
+
+<div id="browse" style="display: block">
+<p><strong>Browse Guests</strong></p>
+<table border="1" cellpadding="5">
+    <tr>
+        <th><a href="#" onClick="showform('insert')">New</a></th>
+        <th></th>
+        <th>id</th>
+        <th>fname</th>
+        <th>lname</th>
+        <th>email</th>
+        <th>phone</th>
+        <th>address</th>
+    </tr>
+    <tr>
+        <td><a href="#" onClick="updateGuest('this.personID')">Edit</a></td>
+        <td><a href="#" onClick="deleteGuest('this.personID')">Delete</a></td>
+        <td>1</td>
+        <td>Sara</td>
+        <td>Bar</td>
+        <td>smbar@hello.com</td>
+        <td>7609879299</td>
+        <td>700 Hedges Rd Encinitas, CA 92101</td> 
+    </tr>
+    <tr>
+        <td><a href="#" onClick="updateGuest('this.personID')">Edit</a></td>
+        <td><a href="#" onClick="deleteGuest('this.personID')">Delete</a></td>
+        <td>2</td>
+        <td>Miguel</td>
+        <td>Lopez</td>
+        <td>mlopez94@hello.com</td>
+        <td>7602995493</td>
+        <td>2338 West F stree Oceanside, CA 92011</td> 
+    </tr>
+    <tr>
+        <td><a href="#" onClick="updateGuest('this.personID')">Edit</a></td>
+        <td><a href="#" onClick="deleteGuest('this.personID')">Delete</a></td>
+        <td>3</td>
+        <td>Brandon</td>
+        <td>Miller</td>
+        <td>bmiller26@hello.com</td>
+        <td>7609923434</td>
+        <td>7763 Vernie Rd Carlsbad, CA 92011</td> 
+    </tr>
+</table>
+</div>
+
+
+
+<p>&nbsp;</p>
+<div id="insert" style="display:none">
+    <form method="POST" id="addGuest">
+        <legend><strong>Add Guest</strong></legend>
+            <fieldset class="fields">
+                <label> first name </label> <input type="text" name="fname">
+                <label> last name </label> <input type="text" name="lname">
+                <label> email </label> <input type="text" name="email">
+                <label> phone </label> <input type="text" name="phone">
+                <label> address </label> <input type="text" name="address">
+            </fieldset> 
+        <fieldset>
+            <input class="btn" type="submit" id="addGuest" value="Add Guest">
+            <input class="btn" type="button" value="cancel" onClick="browseGuests()">
+        </fieldset>
+    </form>
+</div>
+
+
+<p>&nbsp;</p>
+<div id="update" style="display:none">
+    <form method="POST" id="updateGuest">
+        <legend><strong>Update Guest</strong></legend>
+            <fieldset class="fields">
+            <input type="hidden" name="guestID" id="updateguestID" >
+            <label> ID: </label> 1
+            <label> first name </label> <input type="text" name="fname" value="Sara">
+            <label> last name </label> <input type="text" name="lname" value="Bar">
+            <label> email </label> <input type="text" name="email" value="smbar@hello.com">
+            <label> phone </label> <input type="text" name="phone" value="760987299">
+            <label> address </label> <input type="text" name="address" value="700 Hedges Rd Encinitas, CA 92101">
+            </fieldset> 
+        <fieldset>
+            <input class="btn" type="submit" id="addGuest" value="Update Guest">
+            <input class="btn" type="button" value="cancel" onClick="browseGuests()">
+        </fieldset>
+    </form>
+</div>
+
+<p>&nbsp;</p>
+<div id="delete" style="display:none">
+    <form id="deleteGuest">
+        <legend><strong>Delete Guest</strong></legend>
+            <fieldset class="fields">
+            <p>Are you sure you want to delete the following Guest?</p>
+            <input type="hidden" name="GuestID" id="deleteGuest">
+            <label> ID: </label> 1
+            <label> name: </label>"Sara Bar"
+            </fieldset> 
+        <fieldset>
+            <input class="btn" type="submit" id="deleteGuest" value="Delete">
+            <input class="btn" type="button" value="cancel" onClick="browseGuests()">
+        </fieldset>
+    </form>
+</div>
+
+</body>
+</html>
