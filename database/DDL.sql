@@ -27,16 +27,6 @@ CREATE TABLE `Employees` (
   PRIMARY KEY (`employee_id`)
 );
 
-CREATE TABLE `Rentals` (
-  `rental_id` int(11) AUTO_INCREMENT,
-  `rental_name` varchar(255) NOT NULL,
-  `rental_type_id` int (11) NOT NULL,
-  `employee_id` int(11) NOT NULL,
-  PRIMARY KEY (`rental_id`),
-  FOREIGN KEY (`rental_type_id`) REFERENCES `Rental_Types`(`rental_type_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`employee_id`) REFERENCES `Employees`(`employee_id`) ON DELETE SET NULL
-);
-
 CREATE TABLE `Rental_Types` (
   `rental_type_id` int(11) AUTO_INCREMENT,
   `rental_type_name` varchar(255) NOT NULL,
@@ -44,6 +34,16 @@ CREATE TABLE `Rental_Types` (
   `occupancy` int(11) NOT NULL,
   `cost_per_night` int(11) NOT NULL,
   PRIMARY KEY (`rental_type_id`)
+);
+
+CREATE TABLE `Rentals` (
+  `rental_id` int(11) AUTO_INCREMENT,
+  `rental_name` varchar(255) NOT NULL,
+  `rental_type_id` int (11) NOT NULL,
+  `employee_id` int(11),
+  PRIMARY KEY (`rental_id`),
+  FOREIGN KEY (`rental_type_id`) REFERENCES `Rental_Types`(`rental_type_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`employee_id`) REFERENCES `Employees`(`employee_id`) ON DELETE SET NULL
 );
 
 CREATE TABLE `Bookings` (

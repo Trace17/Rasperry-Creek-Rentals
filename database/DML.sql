@@ -12,8 +12,12 @@ VALUES (
     :check_out_date_input,
     :total_cost_input
 );
+
     -- delete bookings
 DELETE FROM `Bookings` WHERE `Booking_id` = :booking_id_input;
+
+-- Search bookings by id
+SELECT * FROM Bookings WHERE id = :booking_id_input;
 ---------------------------------------------------------------------------------------------------------------
 
 -- employees.html data manipulation code
@@ -54,7 +58,7 @@ VALUES (
 );
 
     -- update guest
-UPDATE `Guests` SET `first_name` = :first_name_input, `last_name_input` = :last_name_input,`email` = :email_input,
+UPDATE `Guests` SET `first._name` = :first_name_input, `last_name_input` = :last_name_input,`email` = :email_input,
 `phone` = :phone_input, `address` = :address_input WHERE `employee_id` = :employee_id_input;
 
     -- delete guest
