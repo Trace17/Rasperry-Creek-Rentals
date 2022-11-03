@@ -1,7 +1,11 @@
 -- bookings.html data manipulation code
 
--- Display all Bookings
-SELECT * FROM Bookings;
+-- Display all Bookings adjusting FK relationship for rental ID name
+SELECT booking_id, number_of_guests, Rentals.rental_name, check_in_date, check_out_date, total_cost 
+FROM Bookings 
+INNER JOIN Rentals
+ON Bookings.rental_id = Rentals.rental_id;
+
 
     -- insert booking
 INSERT INTO `Bookings` (`number_of_guests`, `rental_id`, `check_in_date`, `check_out_date`, `total_cost`)
@@ -67,8 +71,10 @@ DELETE FROM `Guests` WHERE `employee_id` = :employee_id_input;
 ---------------------------------------------------------------------------------------------------------------
 
 -- rentals.html data manipulation code
--- Display all rentals
-SELECT * FROM Rentals;
+-- Display all rentals with FK relationships
+SELECT rental_id, rental_name, Rental_Types.rental_type_name, employee_id from Rentals 
+INNER JOIN Rental_Types 
+ON Rentals.rental_Type_id = Rental_Types.rental_type_id;
 
     -- insert new rental
 INSERT INTO `Rentals` ( `rental_name`, `rental_type_id`, `employee_id`)
