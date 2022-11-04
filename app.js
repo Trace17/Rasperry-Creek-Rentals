@@ -35,7 +35,10 @@ app.get('/bookings_guests', function(req, res)                 // This is the ba
 
 app.get('/bookings', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query2 = "SELECT * FROM Bookings;";
+        let query2 = "SELECT booking_id, number_of_guests, Rentals.rental_name as rental_name, check_in_date, check_out_date, total_cost \
+        FROM Bookings \
+        INNER JOIN Rentals \
+        ON Bookings.rental_id = Rentals.rental_id;";
         db.pool.query(query2, function(error, rows, fields){    // Execute the query
 
             res.render('bookings', {data: rows});                  // Render the bookings.hbs file, and also send the renderer
@@ -71,7 +74,9 @@ app.get('/rental_types', function(req, res)                 // This is the basic
     
 app.get('/rentals', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query6 = "SELECT * FROM Rentals;";
+        let query6 = "SELECT rental_id, rental_name, Rental_Types.rental_type_name as rental_type_name, employee_id from Rentals \
+        INNER JOIN Rental_Types \
+        ON Rentals.rental_Type_id = Rental_Types.rental_type_id;";
         db.pool.query(query6, function(error, rows, fields){    // Execute the query
 
             res.render('rentals', {data: rows});                  // Render the rentals.hbs file, and also send the renderer
