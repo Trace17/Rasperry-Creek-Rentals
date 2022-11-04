@@ -26,7 +26,11 @@ app.get('/', function(req, res)                 // This is the basic syntax for 
 
 app.get('/bookings_guests', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query1 = "SELECT booking_id, CONCAT(Guests.first_name, ' ', Guests.last_name) as name from Bookings_Guests \
+        let query1 = "SELECT  CONCAT(Guests.first_name, ' ', Guests.last_name) as name, Bookings.booking_id, Bookings.number_of_guests as number_of_guests, Rentals.rental_name as rental_name, Bookings.check_in_date as check_in_date, Bookings.check_out_date as check_out_date from Bookings_Guests \
+        INNER JOIN Bookings \
+        ON Bookings.booking_id = Bookings_Guests.booking_id \
+        INNER JOIN Rentals \
+        ON Rentals.rental_id = Bookings.rental_id \
         INNER JOIN Guests \
         ON Bookings_Guests.guest_id = Guests.guest_id \
         ORDER BY name DESC;";

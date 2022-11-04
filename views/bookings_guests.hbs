@@ -14,8 +14,12 @@
 <table border="1" cellpadding="5">
 <thead>
     <tr>
-        <th>booking id</th>
         <th>guest</th>
+        <th>booking id</th>
+        <th>number of guests</th>
+        <th>rental</th>
+        <th>check in</th>
+        <th>check out</th>
     </tr>
 </thead>
 {{!-- Body section --}}
@@ -24,8 +28,12 @@
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
         <tr>
-            <td>{{this.booking_id}}</td>
             <td>{{this.name}}</td>
+            <td>{{this.booking_id}}</td>
+            <td>{{this.number_of_guests}}</td>
+            <td>{{this.rental_name}}</td>
+            <td>{{this.check_in_date}}</td>
+            <td>{{this.check_out_date}}</td>
         </tr>
         {{/each}}
     </tbody>
