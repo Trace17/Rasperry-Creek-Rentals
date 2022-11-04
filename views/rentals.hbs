@@ -50,6 +50,7 @@
 <div id="browse" style="display: block">
     <p><strong>Browse Rentals</strong></p>
     <table border="1" cellpadding="5">
+    <thead>
         <tr>
             <th><a href="#" onClick="showform('insert')">New</a></th>
             <th></th>
@@ -58,46 +59,22 @@
             <th>rental type</th>
             <th>employee id</th>
         </tr>
+    </thead>
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
         <tr>
             <td><a href="#" onClick="updateRental('this.rentalID')">Edit</a></td>
             <td><a href="#" onClick="deleteRental('this.rentalID')">Delete</a></td>
-            <td>1</td>
-            <td>Spruce</td>
-            <td>yurt</td>
-            <td>1</td>
+            <td>{{this.rental_id}}</td>
+            <td>{{this.rental_name}}</td>
+            <td>{{this.rental_type_id}}</td>
+            <td>{{this.employee_id}}</td>
         </tr>
-        <tr>
-            <td><a href="#" onClick="updateRental('this.rentalID')">Edit</a></td>
-            <td><a href="#" onClick="deleteRental('this.rentalID')">Delete</a></td>
-            <td>2</td>
-            <td>Pine</td>
-            <td>yurt</td>
-            <td>3</td> 
-        </tr>
-        <tr>
-            <td><a href="#" onClick="updateRental('this.rentalID')">Edit</a></td>
-            <td><a href="#" onClick="deleteRental('this.rentalID')">Delete</a></td>
-            <td>3</td>
-            <td>Cedar</td>
-            <td>yurt</td>
-            <td>1</td>
-        </tr>
-        <tr>
-            <td><a href="#" onClick="updateRental('this.rentalID')">Edit</a></td>
-            <td><a href="#" onClick="deleteRental('this.rentalID')">Delete</a></td>
-            <td>4</td>
-            <td>Blueberry Cottage</td>
-            <td>tiny home</td>
-            <td>2</td>
-        </tr>
-        <tr>
-            <td><a href="#" onClick="updateRental('this.rentalID')">Edit</a></td>
-            <td><a href="#" onClick="deleteRental('this.rentalID')">Delete</a></td>
-            <td>5</td>
-            <td>Strawberry Cottage</td>
-            <td>tiny home</td>
-            <td>2</td>
-        </tr>
+        {{/each}}
+    </tbody>
     </table>
 </div>
 

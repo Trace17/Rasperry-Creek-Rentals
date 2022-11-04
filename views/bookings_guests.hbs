@@ -12,22 +12,24 @@
 <div id="browse" style="display: block"></div>
 <p><strong>Browse Guests Bookings</strong></p>
 <table border="1" cellpadding="5">
+<thead>
     <tr>
         <th>booking id</th>
         <th>guest id</th>
     </tr>
-    <tr>
-        <td>1</td>
-        <td>1</td>
-    </tr>
-    <tr>
-        <td>1</td>
-        <td>2</td>
-    </tr>
-    <tr>
-        <td>2</td>
-        <td>3</td>
-    </tr>
+</thead>
+{{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td>{{this.booking_id}}</td>
+            <td>{{this.guest_id}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+
     </table>
 </div>
 

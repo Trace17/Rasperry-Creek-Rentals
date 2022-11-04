@@ -1,30 +1,41 @@
 <html>
     <head>
-        <title>Rentals</title>
+        <title>Employees</title>
         <script language="Javascript">
             function showform(dowhat){
                 if (dowhat == 'insert'){
                     document.getElementById('browse').style.display = 'none';
                     document.getElementById('insert').style.display = 'block';
+                    document.getElementById('update').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'update'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'block';
                     document.getElementById('delete').style.display = 'none';
                 }
                 else if (dowhat == 'delete'){
                     document.getElementById('browse').style.display = 'none';
                     document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
                     document.getElementById('delete').style.display = 'block';
                 }
                 else {
                     document.getElementById('browse').style.display = 'block';
                     document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
                     document.getElementById('delete').style.display = 'none';
                 }
             }
             
             function newEmployee() { showform('insert');}
-            function deleteEmployee(eid) { showform('delete');}
+            function updateEmployee(gid) { showform('update');}
+            function deleteEmployee(gid) { showform('delete');}
             function browseEmployees() { showform('browse');}
         </script>
     </head>
+
 
 <h1>Employees</h1>
 
@@ -40,81 +51,91 @@
 <div id="browse" style="display: block">
     <p><strong>Browse Employees</strong></p>
     <table border="1" cellpadding="5">
+    <thead>
         <tr>
             <th><a href="#" onClick="showform('insert')">New</a></th>
+            <th></th>
             <th>id</th>
             <th>first name</th>
             <th>last name</th>
             <th>email</th>
             <th>phone</th>
         </tr>
+    </thead>
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
         <tr>
-            <td><a href="#" onClick="deleteEmployee('this.personID')">Delete</a></td>
-            <td>1</td>
-            <td>Kurt</td>
-            <td>Johnson</td>
-            <td>kjohnson@hello.com</td>
-            <td>5028746639</td>
+            <td><a href="#" onClick="updateEmployee('this.employeeID')">Edit</a></td>
+            <td><a href="#" onClick="deleteEmployee('this.employeeID')">Delete</a></td>
+            <td>{{this.employee_id}}</td>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone}}</td>
         </tr>
-        <tr>
-            <td><a href="#" onClick="deleteEmployee('this.personID')">Delete</a></td>
-            <td>2</td>
-            <td>Samantha</td>
-            <td>Williams</td>
-            <td>sammy432@hello.com</td>
-            <td>7602995493</td>
-        </tr>
-        <tr>
-            <td><a href="#" onClick="deleteEmployee('this.personID')">Delete</a></td>
-            <td>3</td>
-            <td>Val</td>
-            <td>Michaels</td>
-            <td>vmichaels@hello.com</td>
-            <td>7554325647</td> 
-        </tr>
+        {{/each}}
+    </tbody>
     </table>
     </div>
 
-    <p>&nbsp;</p>
-    <div id="insert" style="display:none">
-        <form method="POST" id="addEmployee">
-            <legend><strong>Add Employee</strong></legend>
-                <fieldset class="fields">
-                    <label> first name </label> <input type="text" name="fname">
-                    <label> last name </label> <input type="text" name="lname">
-                    <label> email </label> <input type="text" name="email">
-                    <label> phone </label> <input type="text" name="phone">
-                </fieldset> 
-            <fieldset>
-                <input class="btn" type="submit" id="addEmployee" value="Add Employee">
-                <input class="btn" type="button" value="cancel" onClick="browseEmployees()">
-            </fieldset>
-        </form>
-    </div>
+<p>&nbsp;</p>
+<div id="insert" style="display:none">
+    <form method="POST" id="addEmployee">
+        <legend><strong>Add Employee</strong></legend>
+            <fieldset class="fields">
+                <label> first name </label> <input type="text" name="fname">
+                <label> last name </label> <input type="text" name="lname">
+                <label> email </label> <input type="text" name="email">
+                <label> phone </label> <input type="text" name="phone">
+            </fieldset> 
+        <fieldset>
+            <input class="btn" type="submit" id="addEmployee" value="Add Employee">
+            <input class="btn" type="button" value="cancel" onClick="browseEmployees()">
+        </fieldset>
+    </form>
+</div>
 
 
+<p>&nbsp;</p>
+<div id="update" style="display:none">
+    <form method="POST" id="updateEmployee">
+        <legend><strong>Update Employee</strong></legend>
+            <fieldset class="fields">
+            <input type="hidden" name="employeeID" id="updateemployeeID" >
+            <label> ID: </label> 1
+            <label> first name </label> <input type="text" name="fname" value="Sara">
+            <label> last name </label> <input type="text" name="lname" value="Bar">
+            <label> email </label> <input type="text" name="email" value="smbar@hello.com">
+            <label> phone </label> <input type="text" name="phone" value="760987299">
+            </fieldset> 
+        <fieldset>
+            <input class="btn" type="submit" id="addEmployee" value="Update Employee">
+            <input class="btn" type="button" value="cancel" onClick="browseEmployees()">
+        </fieldset>
+    </form>
+</div>
 
-    <p>&nbsp;</p>
-    <div id="delete" style="display:none">
-        <form id="deleteEmployee">
-            <legend><strong>Delete Employee</strong></legend>
-                <fieldset class="fields">
-                <p>Are you sure you want to delete the following Employee?</p>
-                <input type="hidden" name="EmployeeID" id="deleteEmployee">
-                <label> ID: </label> 1
-                <label> name: </label>"Kurt Johnson"
-                </fieldset> 
-            <fieldset>
-                <input class="btn" type="submit" id="deleteEmployee" value="Delete">
-                <input class="btn" type="button" value="cancel" onClick="browseEmployees()">
-            </fieldset>
-        </form>
-    </div>
-    
+<p>&nbsp;</p>
+<div id="delete" style="display:none">
+    <form id="deleteEmployee">
+        <legend><strong>Delete Employee</strong></legend>
+            <fieldset class="fields">
+            <p>Are you sure you want to delete the following Employee?</p>
+            <input type="hidden" name="EmployeeID" id="deleteEmployee">
+            <label> ID: </label> 1
+            <label> name: </label>"Sara Bar"
+            </fieldset> 
+        <fieldset>
+            <input class="btn" type="submit" id="deleteEmployee" value="Delete">
+            <input class="btn" type="button" value="cancel" onClick="browseEmployees()">
+        </fieldset>
+    </form>
+</div>
+
 </body>
 </html>
-    
-    
-    
      
         

@@ -49,6 +49,7 @@
 <div id="browse" style="display: block">
     <p><strong>Browse Bookings</strong></p>
     <table border="1" cellpadding="5">
+    <thead>
         <tr>
             <th><a href="#" onClick="showform('insert')">New</a></th>
             <th>id</th>
@@ -56,35 +57,26 @@
             <th>rental id</th>
             <th>check in</th>
             <th>check out</th>
-            <th>total cost</th>
+            <th>total cost ($)</th>
         </tr>
+    </thead>
+    {{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
         <tr>
             <td><a href="#" onClick="deleteBooking('this.bookingID')">Delete</a></td>
-            <td>1</td>
-            <td>4</td>
-            <td>Spruce</td>
-            <td>2020-11-19</td>
-            <td>2020-11-27</td>
-            <td>640</td>
+            <td>{{this.booking_id}}</td>
+            <td>{{this.number_of_guests}}</td>
+            <td>{{this.rental_id}}</td>
+            <td>{{this.check_in_date}}</td>
+            <td>{{this.check_out_date}}</td>
+            <td>{{this.total_cost}}</td>
         </tr>
-        <tr>
-            <td><a href="#" onClick="deleteBooking('this.bookingID')">Delete</a></td>
-            <td>2</td>
-            <td>4</td>
-            <td>Cedar</td>
-            <td>2020-06-15</td>
-            <td>2020-06-19</td>
-            <td>320</td> 
-        </tr>
-        <tr>
-            <td><a href="#" onClick="deleteBooking('this.bookingID')">Delete</a></td>
-            <td>3</td>
-            <td>6</td>
-            <td>Camp Grizzly</td>
-            <td>2021-1-16</td>
-            <td>2021-1-22</td>
-            <td>90</td>
-        </tr>
+        {{/each}}
+    </tbody>
+
         </table>
         <a href="#" onClick="showform('search')">Search for a Booking</a>
     </div>

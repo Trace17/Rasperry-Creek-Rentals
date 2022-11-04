@@ -5,7 +5,7 @@
 */
 var express = require('express');   // We are using the express library for the web server
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        = 9346;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 9347;                 // Set a port number at the top so it's easy to change in the future
 // Database
 var db = require('./database/db-connector')
 
@@ -21,37 +21,61 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
 */
 app.get('/', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        res.render('index'); 
+        res.render('index');                    //Render the  index.hs
     });                                         // requesting the web site.
 
 app.get('/bookings_guests', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        res.render('bookings_guests'); 
+        let query1 = "SELECT * FROM Bookings_Guests;";
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
+
+            res.render('bookings_guests', {data: rows});                  // Render the bookings_guests.hbs file, and also send the renderer
+        })    
     });  
 
 app.get('/bookings', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        res.render('bookings'); 
+        let query2 = "SELECT * FROM Bookings;";
+        db.pool.query(query2, function(error, rows, fields){    // Execute the query
+
+            res.render('bookings', {data: rows});                  // Render the bookings.hbs file, and also send the renderer
+        })    
     });    
 
 app.get('/employees', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        res.render('employees'); 
+        let query3 = "SELECT * FROM Employees;";
+        db.pool.query(query3, function(error, rows, fields){    // Execute the query
+
+            res.render('employees', {data: rows});                  // Render the employees.hbs file, and also send the renderer
+        })      
     });    
 
 app.get('/guests', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        res.render('guests'); 
+        let query4 = "SELECT * FROM Guests;";
+        db.pool.query(query4, function(error, rows, fields){    // Execute the query
+
+            res.render('guests', {data: rows});                  // Render the guests.hbs file, and also send the renderer
+        })                                            
     });    
 
 app.get('/rental_types', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        res.render('rental_types'); 
+        let query5 = "SELECT * FROM Rental_Types;";
+        db.pool.query(query5, function(error, rows, fields){    // Execute the query
+
+            res.render('rental_types', {data: rows});                  // Render the rental_types.hbs file, and also send the renderer
+        })     
     });  
     
 app.get('/rentals', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        res.render('rentals'); 
+        let query6 = "SELECT * FROM Rentals;";
+        db.pool.query(query6, function(error, rows, fields){    // Execute the query
+
+            res.render('rentals', {data: rows});                  // Render the rentals.hbs file, and also send the renderer
+        })    
     });    
 /*
     LISTENER

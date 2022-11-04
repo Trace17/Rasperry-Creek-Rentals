@@ -37,6 +37,7 @@
     </head>
 
 
+
 <body>
 <h1>Guests</h1>
 
@@ -52,6 +53,7 @@
 <div id="browse" style="display: block">
 <p><strong>Browse Guests</strong></p>
 <table border="1" cellpadding="5">
+<thead>
     <tr>
         <th><a href="#" onClick="showform('insert')">New</a></th>
         <th></th>
@@ -62,36 +64,25 @@
         <th>phone</th>
         <th>address</th>
     </tr>
-    <tr>
-        <td><a href="#" onClick="updateGuest('this.personID')">Edit</a></td>
-        <td><a href="#" onClick="deleteGuest('this.personID')">Delete</a></td>
-        <td>1</td>
-        <td>Sara</td>
-        <td>Bar</td>
-        <td>smbar@hello.com</td>
-        <td>7609879299</td>
-        <td>700 Hedges Rd Encinitas, CA 92101</td> 
-    </tr>
-    <tr>
-        <td><a href="#" onClick="updateGuest('this.personID')">Edit</a></td>
-        <td><a href="#" onClick="deleteGuest('this.personID')">Delete</a></td>
-        <td>2</td>
-        <td>Miguel</td>
-        <td>Lopez</td>
-        <td>mlopez94@hello.com</td>
-        <td>7602995493</td>
-        <td>2338 West F stree Oceanside, CA 92011</td> 
-    </tr>
-    <tr>
-        <td><a href="#" onClick="updateGuest('this.personID')">Edit</a></td>
-        <td><a href="#" onClick="deleteGuest('this.personID')">Delete</a></td>
-        <td>3</td>
-        <td>Brandon</td>
-        <td>Miller</td>
-        <td>bmiller26@hello.com</td>
-        <td>7609923434</td>
-        <td>7763 Vernie Rd Carlsbad, CA 92011</td> 
-    </tr>
+</thead>
+
+{{!-- Body section --}}
+    <tbody>
+
+        {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
+        {{#each data}}
+        <tr>
+            <td><a href="#" onClick="updateGuest('this.personID')">Edit</a></td>
+            <td><a href="#" onClick="deleteGuest('this.personID')">Delete</a></td>
+            <td>{{this.guest_id}}</td>
+            <td>{{this.first_name}}</td>
+            <td>{{this.last_name}}</td>
+            <td>{{this.email}}</td>
+            <td>{{this.phone}}</td>
+            <td>{{this.address}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
 </table>
 </div>
 

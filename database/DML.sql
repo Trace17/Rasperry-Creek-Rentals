@@ -1,7 +1,7 @@
 -- bookings.html data manipulation code
 
 -- Display all Bookings adjusting FK relationship for rental ID name
-SELECT booking_id, number_of_guests, Rentals.rental_name, check_in_date, check_out_date, total_cost 
+SELECT booking_id, number_of_guests, Rentals.rental_name as rental_name, check_in_date, check_out_date, total_cost 
 FROM Bookings 
 INNER JOIN Rentals
 ON Bookings.rental_id = Rentals.rental_id;
