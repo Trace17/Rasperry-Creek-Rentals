@@ -15,7 +15,7 @@
 <thead>
     <tr>
         <th>booking id</th>
-        <th>guest id</th>
+        <th>guest</th>
     </tr>
 </thead>
 {{!-- Body section --}}
@@ -25,7 +25,7 @@
         {{#each data}}
         <tr>
             <td>{{this.booking_id}}</td>
-            <td>{{this.guest_id}}</td>
+            <td>{{this.name}}</td>
         </tr>
         {{/each}}
     </tbody>

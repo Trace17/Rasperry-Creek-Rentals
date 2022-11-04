@@ -72,9 +72,11 @@ DELETE FROM `Guests` WHERE `employee_id` = :employee_id_input;
 
 -- rentals.html data manipulation code
 -- Display all rentals with FK relationships
-SELECT rental_id, rental_name, Rental_Types.rental_type_name, employee_id from Rentals 
-INNER JOIN Rental_Types 
-ON Rentals.rental_Type_id = Rental_Types.rental_type_id;
+SELECT rental_id, rental_name, Rental_Types.rental_type_name as rental_type_name, CONCAT(Employees.first_name, ' ', Employees.last_name) as name from Rentals 
+        INNER JOIN Rental_Types 
+        ON Rentals.rental_Type_id = Rental_Types.rental_type_id 
+        INNER JOIN Employees 
+        ON Rentals.employee_id = Employees.employee_id;
 
     -- insert new rental
 INSERT INTO `Rentals` ( `rental_name`, `rental_type_id`, `employee_id`)

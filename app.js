@@ -26,7 +26,10 @@ app.get('/', function(req, res)                 // This is the basic syntax for 
 
 app.get('/bookings_guests', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query1 = "SELECT * FROM Bookings_Guests;";
+        let query1 = "SELECT booking_id, CONCAT(Guests.first_name, ' ', Guests.last_name) as name from Bookings_Guests \
+        INNER JOIN Guests \
+        ON Bookings_Guests.guest_id = Guests.guest_id \
+        ORDER BY booking_id DESC;";
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
             res.render('bookings_guests', {data: rows});                  // Render the bookings_guests.hbs file, and also send the renderer
@@ -74,9 +77,11 @@ app.get('/rental_types', function(req, res)                 // This is the basic
     
 app.get('/rentals', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query6 = "SELECT rental_id, rental_name, Rental_Types.rental_type_name as rental_type_name, employee_id from Rentals \
+        let query6 = "SELECT rental_id, rental_name, Rental_Types.rental_type_name as rental_type_name, CONCAT(Employees.first_name, ' ', Employees.last_name) as name from Rentals \
         INNER JOIN Rental_Types \
-        ON Rentals.rental_Type_id = Rental_Types.rental_type_id;";
+        ON Rentals.rental_Type_id = Rental_Types.rental_type_id \
+        INNER JOIN Employees \
+        ON Rentals.employee_id = Employees.employee_id;";
         db.pool.query(query6, function(error, rows, fields){    // Execute the query
 
             res.render('rentals', {data: rows});                  // Render the rentals.hbs file, and also send the renderer
