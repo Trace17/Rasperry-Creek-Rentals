@@ -5,7 +5,7 @@
 */
 var express = require('express');   // We are using the express library for the web server
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
-PORT        = 9347;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 9346;                 // Set a port number at the top so it's easy to change in the future
 // Database
 var db = require('./database/db-connector')
 
@@ -29,7 +29,7 @@ app.get('/bookings_guests', function(req, res)                 // This is the ba
         let query1 = "SELECT booking_id, CONCAT(Guests.first_name, ' ', Guests.last_name) as name from Bookings_Guests \
         INNER JOIN Guests \
         ON Bookings_Guests.guest_id = Guests.guest_id \
-        ORDER BY booking_id DESC;";
+        ORDER BY name DESC;";
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
             res.render('bookings_guests', {data: rows});                  // Render the bookings_guests.hbs file, and also send the renderer
