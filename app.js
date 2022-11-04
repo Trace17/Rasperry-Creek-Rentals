@@ -33,7 +33,7 @@ app.get('/bookings_guests', function(req, res)                 // This is the ba
         ON Rentals.rental_id = Bookings.rental_id \
         INNER JOIN Guests \
         ON Bookings_Guests.guest_id = Guests.guest_id \
-        ORDER BY name DESC;";
+        ORDER BY booking_id ASC;";
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
             res.render('bookings_guests', {data: rows});                  // Render the bookings_guests.hbs file, and also send the renderer
