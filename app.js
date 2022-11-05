@@ -7,7 +7,7 @@ var express = require('express');   // We are using the express library for the 
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-PORT        = 9347;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 9346;                 // Set a port number at the top so it's easy to change in the future
 // Database
 var db = require('./database/db-connector')
 
@@ -51,11 +51,11 @@ app.get('/bookings_guests', function(req, res)                 // This is the ba
 
 app.get('/bookings', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query2 = "SELECT booking_id, number_of_guests, Rentals.rental_name as rental_name, check_in_date, check_out_date, total_cost \
+        let query1 = "SELECT booking_id, number_of_guests, Rentals.rental_name as rental_name, check_in_date, check_out_date, total_cost \
         FROM Bookings \
         INNER JOIN Rentals \
         ON Bookings.rental_id = Rentals.rental_id;";
-        db.pool.query(query2, function(error, rows, fields){    // Execute the query
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
             res.render('bookings', {data: rows});                  // Render the bookings.hbs file, and also send the renderer
         })    
@@ -63,8 +63,8 @@ app.get('/bookings', function(req, res)                 // This is the basic syn
 
 app.get('/employees', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query3 = "SELECT * FROM Employees;";
-        db.pool.query(query3, function(error, rows, fields){    // Execute the query
+        let query1 = "SELECT * FROM Employees;";
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
             res.render('employees', {data: rows});                  // Render the employees.hbs file, and also send the renderer
         })      
@@ -72,8 +72,8 @@ app.get('/employees', function(req, res)                 // This is the basic sy
 
 app.get('/guests', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query4 = "SELECT * FROM Guests;";
-        db.pool.query(query4, function(error, rows, fields){    // Execute the query
+        let query1 = "SELECT * FROM Guests;";
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
             res.render('guests', {data: rows});                  // Render the guests.hbs file, and also send the renderer
         })                                            
@@ -81,8 +81,8 @@ app.get('/guests', function(req, res)                 // This is the basic synta
 
 app.get('/rental_types', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query5 = "SELECT * FROM Rental_Types;";
-        db.pool.query(query5, function(error, rows, fields){    // Execute the query
+        let query1 = "SELECT * FROM Rental_Types;";
+        db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
             res.render('rental_types', {data: rows});                  // Render the rental_types.hbs file, and also send the renderer
         })     
@@ -94,19 +94,24 @@ app.get('/rental_types', function(req, res)                 // This is the basic
 // Display data to rentals table
 app.get('/rentals', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query6 = "SELECT rental_id, rental_name, Rental_Types.rental_type_name as rental_type_name, CONCAT(Employees.first_name, ' ', Employees.last_name) as name from Rentals \
+        let query1 = "SELECT rental_id, rental_name, Rental_Types.rental_type_name as rental_type_name, CONCAT(Employees.first_name, ' ', Employees.last_name) as name from Rentals \
         INNER JOIN Rental_Types \
         ON Rentals.rental_Type_id = Rental_Types.rental_type_id \
         INNER JOIN Employees \
         ON Rentals.employee_id = Employees.employee_id \
         ORDER BY rental_id ASC;";
-        db.pool.query(query6, function(error, rows, fields){    // Execute the query
 
-            res.render('rentals', {data: rows});                  // Render the rentals.hbs file, and also send the renderer
+        let query2 = "SELECT * FROM Rental_Types;";
+        db.pool.query(query1, function(error, rows, fields){  
+            let rentals = rows;  // Execute the query
+            db.pool.query(query2, function(error, rows, fields){    // Execute the query
+                let rental_types = rows;
+                res.render('rentals', {data: rentals, rental_types: rental_types});                  // Render the rentals.hbs file, and also send the renderer
+            })               // Render the rentals.hbs file, and also send the renderer
         })    
     });    
 
-    
+
 /* Allow editing of rentals form */
 app.post('/add-rental-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
