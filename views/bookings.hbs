@@ -129,14 +129,14 @@
 
     <p>&nbsp;</p>
     <div id="search" style="display: none">
-        <form id="searchBooking">
+        <form id="search-booking">
             <legend><strong>Search for a Booking</strong></legend>
                 <fieldset class="fields">
                 <p>Provide the ID of the booking you are searching for:</p>
-                <label> id </label> <input type="text" name="booking id">
+                <label> id </label> <input type="number" name="booking_id" id = "booking_id">
                 </fieldset> 
             <fieldset>
-                <input class="btn" type="submit" id="searchRentalType" value="Search">
+                <input class="btn" type="submit" id="searchBookings" value="Search">
                 <input class="btn" type="button" value="cancel" onClick="browseBookings()">
             </fieldset>
         </form>

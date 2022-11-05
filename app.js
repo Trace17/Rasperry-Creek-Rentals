@@ -51,10 +51,22 @@ app.get('/bookings_guests', function(req, res)                 // This is the ba
 
 app.get('/bookings', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query1 = "SELECT booking_id, number_of_guests, Rentals.rental_name as rental_name, check_in_date, check_out_date, total_cost \
+        let query1;
+        if (req.query.booking_id === undefined)
+        { 
+            query1 = "SELECT booking_id, number_of_guests, Rentals.rental_name as rental_name, check_in_date, check_out_date, total_cost \
         FROM Bookings \
         INNER JOIN Rentals \
         ON Bookings.rental_id = Rentals.rental_id;";
+        }
+        else 
+        {
+            query1 = `SELECT booking_id, number_of_guests, Rentals.rental_name as rental_name, check_in_date, check_out_date, total_cost \
+            FROM Bookings \
+            INNER JOIN Rentals \
+            ON Bookings.rental_id = Rentals.rental_id \
+            WHERE booking_id LIKE "${req.query.booking_id}%";`;
+        }
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
             res.render('bookings', {data: rows});                  // Render the bookings.hbs file, and also send the renderer
