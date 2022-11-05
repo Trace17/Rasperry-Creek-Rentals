@@ -81,15 +81,24 @@
     </table>
     </div>
 
+{{!-- {{Insert new guest form}} --}}
+
 <p>&nbsp;</p>
 <div id="insert" style="display:none">
-    <form method="POST" id="addEmployee">
+    <form id="add-employee-form" method = "POST" action = "/add-employee-form">
         <legend><strong>Add Employee</strong></legend>
             <fieldset class="fields">
-                <label> first name </label> <input type="text" name="fname">
-                <label> last name </label> <input type="text" name="lname">
-                <label> email </label> <input type="text" name="email">
-                <label> phone </label> <input type="text" name="phone">
+                <label> first name </label> 
+                <input type="text" name="input_employee_first_name" id = "input_employee_first_name">
+                
+                <label> last name </label> 
+                <input type="text" name="input_employee_last_name" id = "input_employee_last_name">
+
+                <label> email </label> 
+                <input type="text" name="input_employee_email" id = "input_employee_email">
+
+                <label> phone </label> 
+                <input type="text" name="input_employee_phone" id = "input_employee_phone">
             </fieldset> 
         <fieldset>
             <input class="btn" type="submit" id="addEmployee" value="Add Employee">

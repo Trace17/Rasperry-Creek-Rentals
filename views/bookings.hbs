@@ -86,20 +86,21 @@
 
     <p>&nbsp;</p>
     <div id="insert" style="display:none">
-        <form method="POST" id="addBooking">
+        <form id="add-booking-form" method = "POST" action = "/add-booking-form">
             <legend><strong>Add Booking</strong></legend>
                 <fieldset class="fields">
-                    <label> number of guests </label> <input type="text" name="number of guests">
-                    <label> rental id </label> <select name="rental type id">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        </select>
-                    <label> check in </label> <input type="date" name="check in">
-                    <label> check out </label> <input type="date" name="check out">
-                    <label> total cost </label> <input type="number" step="any" name="total cost">
+                    <label> number of guests </label> <input type="number" name="input_number_of_guests" id = "input_number_of_guests">
+                    <label> rental id </label>
+                    <select name="input_rental" id = "input_rental">
+                    <option value="">Select a Rental</option>
+                    {{#each rentals}}
+                    <option value="{{this.rental_id}}">{{this.rental_name}}</option>
+                    {{/each}}
+                    </select>
+                
+                    <label> check in </label> <input type="date" name="input_check_in_date" id = "input_check_in_date">
+                    <label> check out </label> <input type="date" name="input_check_out_date" id = "input_check_out_date">
+                    <label> total cost </label> <input type="number" step="any" name="input_total_cost" id = "input_total_cost">
                 </fieldset> 
             <fieldset>
                 <input class="btn" type="submit" id="addBooking" value="Add Booking">

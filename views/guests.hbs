@@ -88,16 +88,27 @@
 
 
 
+{{!-- {{Insert new guest form}} --}}
+
 <p>&nbsp;</p>
 <div id="insert" style="display:none">
-    <form method="POST" id="addGuest">
+    <form id="add-guest-form" method = "POST" action = "/add-guest-form">
         <legend><strong>Add Guest</strong></legend>
             <fieldset class="fields">
-                <label> first name </label> <input type="text" name="fname">
-                <label> last name </label> <input type="text" name="lname">
-                <label> email </label> <input type="text" name="email">
-                <label> phone </label> <input type="text" name="phone">
-                <label> address </label> <input type="text" name="address">
+                <label> first name </label> 
+                <input type="text" name="input_guest_first_name" id = "input_guest_first_name">
+                
+                <label> last name </label> 
+                <input type="text" name="input_guest_last_name" id = "input_guest_last_name">
+
+                <label> email </label> 
+                <input type="text" name="input_guest_email" id = "input_guest_email">
+
+                <label> phone </label> 
+                <input type="text" name="input_guest_phone" id = "input_guest_phone">
+
+                <label> address </label> 
+                <input type="text" name="input_guest_address" id = "input_guest_address">
             </fieldset> 
         <fieldset>
             <input class="btn" type="submit" id="addGuest" value="Add Guest">
@@ -105,6 +116,7 @@
         </fieldset>
     </form>
 </div>
+
 
 
 <p>&nbsp;</p>
