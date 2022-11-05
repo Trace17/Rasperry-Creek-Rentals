@@ -79,7 +79,7 @@
 </div>
 
 
-
+{{!-- {{Insert new rental form}} --}}
 
 <p>&nbsp;</p>
 <div id="insert" style="display:none">
@@ -90,6 +90,8 @@
                 <input type="text" name="input_rental_name" id = "input_rental_name">
 
                 <label> rental type id </label> 
+                
+                {{!-- {{Select for rental dynamic drop down}} --}}
                 <select name="input_rental_type_id" id = "input_rental_type_id">
                     <option value="">Select a Rental Type</option>
                     {{#each rental_types}}
@@ -97,8 +99,12 @@
                     {{/each}}
                 </select>
                 
-                <label> employee id </label> 
-                <input type="number" name="input_employee_id" id = "input_employee_id">
+                <select name="input_employee" id = "input_employee">
+                    <option value="">Select an Employee</option>
+                    {{#each employees}}
+                    <option value="{{this.employee_id}}">{{this.name}}</option>
+                    {{/each}}
+                </select>
             </fieldset> 
         <fieldset>
             <input class="btn" type="submit" id="addRental" value="Add Rental">
@@ -108,7 +114,7 @@
 </div>
 
 
-
+{{!-- {{Update existing rental form}} --}}
 
 <p>&nbsp;</p>
 <div id="update" style="display:none">
@@ -135,6 +141,8 @@
         </fieldset>
     </form>
 </div>
+
+{{!-- {{Delete rental form}} --}}
 
 <p>&nbsp;</p>
 <div id="delete" style="display:none">

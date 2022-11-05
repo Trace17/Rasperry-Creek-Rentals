@@ -114,17 +114,23 @@ app.get('/rentals', function(req, res)                 // This is the basic synt
         ORDER BY rental_id ASC;";
 
         let query2 = "SELECT * FROM Rental_Types;";
+
+        let query3 = "SELECT employee_id, CONCAT(first_name, ' ', last_name) as name FROM Employees"
+        
         db.pool.query(query1, function(error, rows, fields){  
             let rentals = rows;  // Execute the query
             db.pool.query(query2, function(error, rows, fields){    // Execute the query
                 let rental_types = rows;
-                res.render('rentals', {data: rentals, rental_types: rental_types});                  // Render the rentals.hbs file, and also send the renderer
+                db.pool.query(query3, function(error, rows, fields){    // Execute the query
+                    let employees = rows;
+                    res.render('rentals', {data: rentals, rental_types: rental_types, employees: employees});                  // Render the rentals.hbs file, and also send the renderer
+                })                 // Render the rentals.hbs file, and also send the renderer
             })               // Render the rentals.hbs file, and also send the renderer
         })    
     });    
 
 
-/* Allow editing of rentals form */
+/* Allows adding of new rental */
 app.post('/add-rental-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
