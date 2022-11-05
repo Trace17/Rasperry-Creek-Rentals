@@ -49,7 +49,7 @@
 
 <div id="browse" style="display: block">
     <p><strong>Browse Rentals</strong></p>
-    <table border="1" cellpadding="5">
+    <table id = "rentals-table" border="1" cellpadding="5">
     <thead>
         <tr>
             <th><a href="#" onClick="showform('insert')">New</a></th>
@@ -78,22 +78,27 @@
     </table>
 </div>
 
+
+
+
 <p>&nbsp;</p>
 <div id="insert" style="display:none">
-    <form method="POST" id="addRental">
+    <form id="add-rental-form" method = "POST" action = "/add-rental-form">
         <legend><strong>Add Rental</strong></legend>
             <fieldset class="fields">
-                <label> name </label> <input type="text" name="fname">
-                <label> rental type id </label> <select name="rental type id">
+                <label> name </label> 
+                <input type="text" name="input_rental_name" id = "input_rental_name">
+
+                <label> rental type id </label> 
+                <select name="input_rental_type_id" id = "input_rental_type_id">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
-                    </select>
-                <label> employee id </label> <select name="employee id">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    </select>
+                    <option value="4">4</option>
+                </select>
+                
+                <label> employee id </label> 
+                <input type="number" name="input_employee_id" id = "input_employee_id">
             </fieldset> 
         <fieldset>
             <input class="btn" type="submit" id="addRental" value="Add Rental">
@@ -101,6 +106,9 @@
         </fieldset>
     </form>
 </div>
+
+
+
 
 <p>&nbsp;</p>
 <div id="update" style="display:none">
