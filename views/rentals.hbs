@@ -30,8 +30,8 @@
             }
             
             function newRental() { showform('insert');}
-            function updateRental(gid) { showform('update');}
-            function deleteRental(gid) { showform('delete');}
+            function updateRental() { showform('update');}
+            {{!-- {{function deleteRental(gid) { showform('delete');}}} --}}
             function browseRentals() { showform('browse');}
         </script>
     </head>
@@ -67,7 +67,7 @@
         {{#each data}}
         <tr>
             <td><a href="#" onClick="updateRental('this.rentalID')">Edit</a></td>
-            <td><a href="#" onClick="deleteRental('this.rentalID')">Delete</a></td>
+            <td><a href="/delete_rentals/{{this.rental_id}}">Delete</a></td>
             <td>{{this.rental_id}}</td>
             <td>{{this.rental_name}}</td>
             <td>{{this.rental_type_name}}</td>
@@ -114,35 +114,55 @@
 </div>
 
 
-{{!-- {{Update existing rental form}} --}}
+{{!-- {{Update rental form}} --}}
 
 <p>&nbsp;</p>
 <div id="update" style="display:none">
-    <form method="POST" id="UpdateRental">
+    <form id="update-rental-form" method = "POST" action = "/update-rental-form">
         <legend><strong>Update Rental</strong></legend>
             <fieldset class="fields">
-            <input type="hidden" name="rentalID" id="updaterentalID" >
-            <label> ID: </label> 1
-            <label> name </label> <input type="text" name="fname" value="Spruce">
-            <label> rental type id </label> <select name="rental type id">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+            <label> Select the rental ID to update</label> 
+            <select name="input_rental_id" id = "input_rental_id">
+                {{#each data}}
+                <option value="{{this.rental_id}}">{{this.rental_id}}</option>
+                {{/each}}
+            </select>
+
+                <label> Rental Name </label> 
+                <input type="text" name="input_rental_name" id = "input_rental_name">
+
+                <label> Rental Type </label> 
+                
+                {{!-- {{Select for rental dynamic drop down}} --}}
+                <select name="input_rental_type_id" id = "input_rental_type_id">
+                    <option value="">Select a Rental Type</option>
+                    {{#each rental_types}}
+                    <option value="{{this.rental_type_id}}">{{this.rental_type_name}}</option>
+                    {{/each}}
                 </select>
-            <label> employee id </label> <select name="employee id">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
+                
+                <label> Employee </label> 
+                <select name="input_employee" id = "input_employee">
+                    <option value="">Select an Employee</option>
+                    {{#each employees}}
+                    <option value="{{this.employee_id}}">{{this.name}}</option>
+                    {{/each}}
                 </select>
             </fieldset> 
         <fieldset>
-            <input class="btn" type="submit" id="addRental" value="Update Rental">
+            <input class="btn" type="submit" id="updateRental" value="Update Rental">
             <input class="btn" type="button" value="cancel" onClick="browseRentals()">
         </fieldset>
     </form>
 </div>
 
-{{!-- {{Delete rental form}} --}}
+
+
+
+
+
+
+{{!-- {{Delete rental form (Not in use)}} --}}
 
 <p>&nbsp;</p>
 <div id="delete" style="display:none">

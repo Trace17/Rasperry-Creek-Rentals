@@ -1,33 +1,36 @@
 <html>
     <head>
-        <title>Rentals</title>
+        <title>Rental Types</title>
         <script language="Javascript">
             function showform(dowhat){
                 if (dowhat == 'insert'){
                     document.getElementById('browse').style.display = 'none';
                     document.getElementById('insert').style.display = 'block';
+                    document.getElementById('update').style.display = 'none';
                     document.getElementById('delete').style.display = 'none';
                 }
                 else if (dowhat == 'update'){
                     document.getElementById('browse').style.display = 'none';
                     document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'block';
                     document.getElementById('delete').style.display = 'none';
                 }
                 else if (dowhat == 'delete'){
                     document.getElementById('browse').style.display = 'none';
                     document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
                     document.getElementById('delete').style.display = 'block';
                 }
                 else {
                     document.getElementById('browse').style.display = 'block';
                     document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
                     document.getElementById('delete').style.display = 'none';
                 }
             }
             
             function newRentalType() { showform('insert');}
             function updateRentalType() { showform('update');}
-            function deleteRentalType(rtid) { showform('delete');}
             function browseRentalTypes() { showform('browse');}
         </script>
     </head>
@@ -61,8 +64,8 @@
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
         <tr>
-            <td><a href="#" onClick="updateRentalType('this.rentalTypeID')">Edit</a></td>
-            <td><a href="#" onClick="deleteRentalType('this.rentalTypeID')">Delete</a></td>
+            <td><a href="#" onClick="updateRentalType('this.rentalID')">Edit</a></td>
+            <td><a href="/delete_rental_types/{{this.rental_type_id}}">Delete</a></td>
             <td>{{this.rental_type_id}}</td>
             <td>{{this.rental_type_name}}</td>
             <td>{{this.availability}}</td>
@@ -89,11 +92,11 @@
                 {{!-- {{Select for rental type drop down}} --}}
                 <select name="input_availability" id = "input_availability">
                     <option value="">Select an availability</option>
-                    <option value ="Year Round"> Year Round</option>
-                    <option value ="Summer"> Summer</option>
-                    <option value ="Fall"> Fall</option>
-                    <option value ="Winter"> Winter</option>
-                    <option value ="Spring"> Spring</option>
+                    <option value =Year Round> Year Round</option>
+                    <option value =Summer> Summer</option>
+                    <option value =Fall> Fall</option>
+                    <option value =Winter> Winter</option>
+                    <option value =Spring> Spring</option>
                 </select>
                 
                 <label> occupancy </label> 
@@ -109,20 +112,41 @@
     </form>
 </div>
 
+
+
+{{!-- {{Update rental form}} --}}
+
 <p>&nbsp;</p>
 <div id="update" style="display:none">
-    <form method="POST" id="updateRentalType">
+    <form id="update-rental-types-form" method = "POST" action = "/update-rental-types-form">
         <legend><strong>Update Rental Type</strong></legend>
             <fieldset class="fields">
-                <input type="hidden" name="rentalTypeID" id="updateRentalTypeID" >
-                <label> ID: </label> 1
-                <label> name </label> <input type="text" name="name">
-                <label> year round </label> <select name="year round">
-                    <option value="1">yes</option>
-                    <option value="2">summer only</option>
-                    </select>
-                <label> max occupancy </label> <input type="number" name="max occupancy">
-                <label> cost per night </label> <input type="number" step="any" name="cost per night">
+            <label> Select the Rental Type ID to Update</label> 
+            <select name="input_rental_type_id" id = "input_rental_type_id">
+                {{#each data}}
+                <option value="{{this.rental_type_id}}">{{this.rental_type_id}}</option>
+                {{/each}}
+            </select>
+                <label> name </label> 
+                <input type="text" name="input_rental_type_name" id = "input_rental_type_name">
+
+                <label> availability </label> 
+                
+                {{!-- {{Select for rental type drop down}} --}}
+                <select name="input_availability" id = "input_availability">
+                    <option value="">Select an availability</option>
+                    <option value ="Year Round"> Year Round</option>
+                    <option value ="Summer"> Summer</option>
+                    <option value ="Fall"> Fall</option>
+                    <option value ="Winter"> Winter</option>
+                    <option value ="Spring"> Spring</option>
+                </select>
+                
+                <label> occupancy </label> 
+                <input type="number" name="input_occupancy" id = "input_occupancy">
+
+                <label> cost per night </label> 
+                <input type="number" name="input_cost_per_night" id = "input_cost_per_night">
             </fieldset> 
         <fieldset>
             <input class="btn" type="submit" id="updateRentalType" value="Update Rental Type">
@@ -131,21 +155,5 @@
     </form>
 </div>
 
-<p>&nbsp;</p>
-<div id="delete" style="display: none">
-    <form id="deleteBooking">
-        <legend><strong>Delete Rental Type</strong></legend>
-            <fieldset class="fields">
-            <p>Are you sure you want to delete the following Rental Type?</p>
-            <input type="hidden" name="RentalTypeID" id="deleteRentalType">
-            <label> ID: </label> 1
-            <label> name: </label>"Yurt"
-            </fieldset> 
-        <fieldset>
-            <input class="btn" type="submit" id="deleteRentalType" value="Delete">
-            <input class="btn" type="button" value="cancel" onClick="browseRentalTypes()">
-        </fieldset>
-    </form>
-</div>
 </body>
 </html>

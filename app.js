@@ -25,6 +25,10 @@ app.set('view engine', '.hbs');                 // Tell express to use the handl
     ROUTES
 */
 
+/*
+---------- Display functions (GET) ----------
+*/
+
 //Home page display 
 app.get('/', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
@@ -49,6 +53,8 @@ app.get('/bookings_guests', function(req, res)                 // This is the ba
         })    
     });  
 
+
+//Bookings display
 app.get('/bookings', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
         let query1;
@@ -78,6 +84,8 @@ app.get('/bookings', function(req, res)                 // This is the basic syn
         })    
     });    
 
+
+//employees display    
 app.get('/employees', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
         let query1 = "SELECT * FROM Employees;";
@@ -87,6 +95,8 @@ app.get('/employees', function(req, res)                 // This is the basic sy
         })      
     });    
 
+
+//guests display    
 app.get('/guests', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
         let query1 = "SELECT * FROM Guests;";
@@ -96,6 +106,8 @@ app.get('/guests', function(req, res)                 // This is the basic synta
         })                                            
     });    
 
+
+//rental types display    
 app.get('/rental_types', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
         let query1 = "SELECT * FROM Rental_Types;";
@@ -105,10 +117,8 @@ app.get('/rental_types', function(req, res)                 // This is the basic
         })     
     });  
     
-
-
-/* Rentals Data manipulation */
-// Display data to rentals table
+    
+// rentals display
 app.get('/rentals', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
         let query1 = "SELECT rental_id, rental_name, Rental_Types.rental_type_name as rental_type_name, CONCAT(Employees.first_name, ' ', Employees.last_name) as name from Rentals \
@@ -135,34 +145,19 @@ app.get('/rentals', function(req, res)                 // This is the basic synt
     });    
 
 
-/* Allows adding of new rental */
+/*
+---------- Create Functions (POST) ----------
+*/
+
+// Allows adding of new rental 
 app.post('/add-rental-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
     // Capture NULL values (Does not work correctly) *************
 
-    let rental_name = data['input_rental_name'];
-    if (rental_name.length === 0)
-    {
-        rental_name = "NULL"
-    }
-
-    let rental_type_id = parseInt(data['input_rental_type_id']);
-    if (isNaN(rental_type_id))
-    {
-        rental_type_id = 'NULL'
-    }
-
-    let employee_id = parseInt(data['input_employee_id']);
-    if (isNaN(employee_id))
-    {
-        employee_id = 'NULL'
-    }
-
-
     // Create the query and run it on the database
-    query1 = `INSERT INTO Rentals (rental_name, rental_type_id, employee_id) VALUES ("${rental_name}", ${rental_type_id}, ${employee_id})`;
+    query1 = `INSERT INTO Rentals (rental_name, rental_type_id, employee_id) VALUES ("${data['input_rental_name']}", "${data['input_rental_type_id']}", ${data['input_employee_id']})`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -183,7 +178,7 @@ app.post('/add-rental-form', function(req, res){
 })
 
 
-/* Allows adding of new guest */
+// Allows adding of new guest 
 app.post('/add-guest-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
@@ -243,7 +238,7 @@ app.post('/add-guest-form', function(req, res){
 })
 
 
-/* Allows the addition of new rental types */
+// Allows the addition of new rental types 
 app.post('/add-rental-types-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
@@ -256,13 +251,13 @@ app.post('/add-rental-types-form', function(req, res){
         rental_type_name = "NULL"
     }
 
-    let availability = data['input_availability'];
+    let availability = data['input_availability']; 
     if (availability.length === 0)
     {
         availability = "NULL"
     }
 
-    let occupancy = parseInt(data['input_occupancy']);
+    let occupancy = parseInt(data['input_occupancy']); 
     if (isNaN(occupancy))
     {
         occupancy = 'NULL'
@@ -297,8 +292,7 @@ app.post('/add-rental-types-form', function(req, res){
 })
 
 
-
-/* Allows adding of new employee */
+// Allows adding of new employee 
 app.post('/add-employee-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
@@ -351,7 +345,8 @@ app.post('/add-employee-form', function(req, res){
     })
 })
 
-/* Allows the addition of a new booking  --------- Booking Date not working*/
+
+// Allows the addition of a new booking  *************** Booking Date not working
 app.post('/add-booking-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
@@ -377,7 +372,7 @@ app.post('/add-booking-form', function(req, res){
     }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Bookings (number_of_guests, rental_id, check_in_date, check_out_date, total_cost) VALUES (${number_of_guests}, ${rental}, "${data['check_in_date']}", "${data['check_out_date']}", ${total_cost})`;
+    query1 = `INSERT INTO Bookings (number_of_guests, rental_id, check_in_date, check_out_date, total_cost) VALUES (${number_of_guests}, ${rental}, "${data['input_check_in_date']}", "${data['input_check_out_date']}", ${total_cost})`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -393,6 +388,298 @@ app.post('/add-booking-form', function(req, res){
         else
         {
             res.redirect('bookings');
+        }
+    })
+})
+
+
+/*
+---------- Delete functions (GET/DELETE) ----------
+*/
+//Delete for rentals
+app.get('/delete_rentals/:id', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.params.id;
+  
+    // Create the query and run it on the database
+    query1 = `DELETE FROM Rentals WHERE rental_id = ${data}`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {   
+            console.log(`successfully deleted rental with ID: ${data}`)
+            res.redirect('/rentals')
+        }
+    })
+})
+
+
+//delete for rental_types
+app.get('/delete_rental_types/:id', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.params.id;
+  
+    // Create the query and run it on the database
+    query1 = `DELETE FROM Rental_Types WHERE rental_type_id = ${data}`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {   
+            console.log(`successfully deleted rental type with ID: ${data}`)
+            res.redirect('/rental_types')
+        }
+    })
+})
+
+
+//delete for guests
+app.get('/delete_guests/:id', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.params.id;
+  
+    // Create the query and run it on the database
+    query1 = `DELETE FROM Guests WHERE guest_id = ${data}`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {   
+            console.log(`successfully deleted guest with ID: ${data}`)
+            res.redirect('/guests')
+        }
+    })
+})
+
+
+//employees
+app.get('/delete_employees/:id', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.params.id;
+  
+    // Create the query and run it on the database
+    query1 = `DELETE FROM Employees WHERE employee_id = ${data}`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {   
+            console.log(`successfully deleted employee with ID: ${data}`)
+            res.redirect('/employees')
+        }
+    })
+})
+
+
+//delete for bookings
+app.get('/delete_bookings/:id', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.params.id;
+  
+    // Create the query and run it on the database
+    query1 = `DELETE FROM Bookings WHERE booking_id = ${data}`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {   
+            console.log(`successfully deleted booking with ID: ${data}`)
+            res.redirect('/bookings')
+        }
+    })
+})
+
+
+/*
+---------- Create Functions (POST) ----------
+*/
+
+// Allows updating of new rental 
+app.post('/update-rental-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values (Does not work correctly) *************
+
+    // Create the query and run it on the database
+    query1 = `UPDATE Rentals SET rental_name = "${data['input_rental_name']}", rental_type_id = ${data['input_rental_type_id']}, employee_id = ${data['input_employee']} WHERE rental_id = ${data['input_rental_id']};`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/rentals');
+        }
+    })
+})
+
+
+// Allows updating of rental_type
+app.post('/update-rental-types-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values (Does not work correctly) *************
+
+    // Create the query and run it on the database 
+    query1 = `UPDATE Rental_Types SET rental_type_name = "${data['input_rental_type_name']}", availability = "${data['input_availability']}", occupancy = ${data['input_occupancy']}, cost_per_night = ${data['input_cost_per_night']} WHERE rental_type_id = ${data['input_rental_type_id']};`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/rental_types');
+        }
+    })
+})
+
+
+//update guest
+app.post('/update-guest-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values (Does not work correctly) *************
+
+    // Create the query and run it on the database 
+    query1 = `UPDATE Guests SET first_name = "${data['input_guest_first_name']}", last_name = "${data['input_guest_last_name']}", email = "${data['input_guest_email']}", phone = "${data['input_guest_phone']}", address = "${data['input_guest_address']}" WHERE guest_id = ${data['input_guest_id']};`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/guests');
+        }
+    })
+})
+
+
+//update employee
+app.post('/update-employee-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values (Does not work correctly) *************
+
+    // Create the query and run it on the database 
+    query1 = `UPDATE Employees SET first_name = "${data['input_employee_first_name']}", last_name = "${data['input_employee_last_name']}", email = "${data['input_employee_email']}", phone = "${data['input_employee_phone']}" WHERE employee_id = ${data['input_employee_id']};`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/employees');
+        }
+    })
+})
+
+
+//update booking
+app.post('/update-booking-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values (Does not work correctly) *************
+
+    // Create the query and run it on the database 
+    query1 = `UPDATE Bookings SET number_of_guests = ${data['input_number_of_guests']}, rental_id = ${data['input_rental']}, check_in_date = ${data['input_check_in_date']}, check_out_date = ${data['input_check_out_date']}, total_cost = ${data['input_total_cost']} WHERE booking_id = ${data['input_booking_id']};`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/bookings');
         }
     })
 })

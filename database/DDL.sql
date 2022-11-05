@@ -54,7 +54,7 @@ CREATE TABLE `Bookings` (
   `check_out_date` date NOT NULL,
   `total_cost` decimal NOT NULL,
   PRIMARY KEY (`booking_id`),
-  FOREIGN KEY (`rental_id`) REFERENCES `Rentals`(`rental_id`) ON DELETE NO ACTION 
+  FOREIGN KEY (`rental_id`) REFERENCES `Rentals`(`rental_id`) ON DELETE NO ACTION
 );
 
 CREATE TABLE `Bookings_Guests` (

@@ -6,8 +6,8 @@
                 if (dowhat == 'insert'){
                     document.getElementById('browse').style.display = 'none';
                     document.getElementById('insert').style.display = 'block';
+                    document.getElementById('update').style.display = 'none';
                     document.getElementById('delete').style.display = 'none';
-                    document.getElementById('search').style.display = 'none';
                 }
                 else if (dowhat == 'update'){
                     document.getElementById('browse').style.display = 'none';
@@ -18,8 +18,8 @@
                 else if (dowhat == 'delete'){
                     document.getElementById('browse').style.display = 'none';
                     document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
                     document.getElementById('delete').style.display = 'block';
-                    document.getElementById('search').style.display = 'none';
                 }
                 else if (dowhat == 'search'){
                     document.getElementById('browse').style.display = 'none';
@@ -30,14 +30,13 @@
                 else {
                     document.getElementById('browse').style.display = 'block';
                     document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'none';
                     document.getElementById('delete').style.display = 'none';
-                    document.getElementById('search').style.display = 'none';
-
                 }
             }
             
             function newBooking() { showform('insert');}
-            function updateBooking(bid) { showform('update');}
+            function updateBooking() { showform('update');}
             function deleteBooking(bid) { showform('delete');}
             function browseBookings() { showform('browse');}
         </script>
@@ -74,7 +73,7 @@
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
         <tr>
-            <td><a href="#" onClick="updateBooking('this.bookingID')">Edit</a></td>
+            <td><a href="#" onClick="updateBooking()">Edit</a></td>
             <td><a href="/delete_bookings/{{this.booking_id}}">Delete</a></td>
             <td>{{this.booking_id}}</td>
             <td>{{this.number_of_guests}}</td>
@@ -117,9 +116,9 @@
             </fieldset>
         </form>
     </div>
+    
 
-
-<p>&nbsp;</p>
+    <p>&nbsp;</p>
     <div id="update" style="display:none">
         <form id="update-booking-form" method = "POST" action = "/update-booking-form">
             <legend><strong>Update Booking</strong></legend>
@@ -149,26 +148,6 @@
             </fieldset>
         </form>
     </div>
-
-
-    <p>&nbsp;</p>
-    <div id="delete" style="display: none">
-        <form id="deleteBooking">
-            <legend><strong>Delete Booking</strong></legend>
-                <fieldset class="fields">
-                <p>Are you sure you want to delete the following Booking?</p>
-                <input type="hidden" name="BookingID" id="deleteBooking">
-                <label> ID: </label> 1
-                <label> number of guests: </label>"4"
-                </fieldset> 
-            <fieldset>
-                <input class="btn" type="submit" id="deleteBooking" value="Delete">
-                <input class="btn" type="button" value="cancel" onClick="browseBookings()">
-            </fieldset>
-        </form>
-    </div>
-    
-
 
     <p>&nbsp;</p>
     <div id="search" style="display: none">

@@ -69,7 +69,7 @@
         {{#each data}}
         <tr>
             <td><a href="#" onClick="updateEmployee('this.employeeID')">Edit</a></td>
-            <td><a href="#" onClick="deleteEmployee('this.employeeID')">Delete</a></td>
+            <td><a href="/delete_employees/{{this.employee_id}}">Delete</a></td>
             <td>{{this.employee_id}}</td>
             <td>{{this.first_name}}</td>
             <td>{{this.last_name}}</td>
@@ -107,38 +107,33 @@
     </form>
 </div>
 
+{{!-- {{Insert new guest form}} --}}
 
 <p>&nbsp;</p>
 <div id="update" style="display:none">
-    <form method="POST" id="updateEmployee">
+    <form id="update-employee-form" method = "POST" action = "/update-employee-form">
         <legend><strong>Update Employee</strong></legend>
             <fieldset class="fields">
-            <input type="hidden" name="employeeID" id="updateemployeeID" >
-            <label> ID: </label> 1
-            <label> first name </label> <input type="text" name="fname" value="Sara">
-            <label> last name </label> <input type="text" name="lname" value="Bar">
-            <label> email </label> <input type="text" name="email" value="smbar@hello.com">
-            <label> phone </label> <input type="text" name="phone" value="760987299">
-            </fieldset> 
-        <fieldset>
-            <input class="btn" type="submit" id="addEmployee" value="Update Employee">
-            <input class="btn" type="button" value="cancel" onClick="browseEmployees()">
-        </fieldset>
-    </form>
-</div>
+            <label> Select the Employee ID to Update</label> 
+            <select name="input_employee_id" id = "input_employee_id">
+                {{#each data}}
+                <option value="{{this.employee_id}}">{{this.employee_id}}</option>
+                {{/each}}
+            </select>
+                <label> first name </label> 
+                <input type="text" name="input_employee_first_name" id = "input_employee_first_name">
+                
+                <label> last name </label> 
+                <input type="text" name="input_employee_last_name" id = "input_employee_last_name">
 
-<p>&nbsp;</p>
-<div id="delete" style="display:none">
-    <form id="deleteEmployee">
-        <legend><strong>Delete Employee</strong></legend>
-            <fieldset class="fields">
-            <p>Are you sure you want to delete the following Employee?</p>
-            <input type="hidden" name="EmployeeID" id="deleteEmployee">
-            <label> ID: </label> 1
-            <label> name: </label>"Sara Bar"
+                <label> email </label> 
+                <input type="text" name="input_employee_email" id = "input_employee_email">
+
+                <label> phone </label> 
+                <input type="text" name="input_employee_phone" id = "input_employee_phone">
             </fieldset> 
         <fieldset>
-            <input class="btn" type="submit" id="deleteEmployee" value="Delete">
+            <input class="btn" type="submit" id="updateEmployee" value="Update Employee">
             <input class="btn" type="button" value="cancel" onClick="browseEmployees()">
         </fieldset>
     </form>

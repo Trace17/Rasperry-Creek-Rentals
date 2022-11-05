@@ -73,7 +73,7 @@
         {{#each data}}
         <tr>
             <td><a href="#" onClick="updateGuest('this.personID')">Edit</a></td>
-            <td><a href="#" onClick="deleteGuest('this.personID')">Delete</a></td>
+            <td><a href="/delete_guests/{{this.guest_id}}">Delete</a></td>
             <td>{{this.guest_id}}</td>
             <td>{{this.first_name}}</td>
             <td>{{this.last_name}}</td>
@@ -117,40 +117,36 @@
     </form>
 </div>
 
-
+{{!-- {{Update guest form}} --}}
 
 <p>&nbsp;</p>
 <div id="update" style="display:none">
-    <form method="POST" id="updateGuest">
+    <form id="update-guest-form" method = "POST" action = "/update-guest-form">
         <legend><strong>Update Guest</strong></legend>
             <fieldset class="fields">
-            <input type="hidden" name="guestID" id="updateguestID" >
-            <label> ID: </label> 1
-            <label> first name </label> <input type="text" name="fname" value="Sara">
-            <label> last name </label> <input type="text" name="lname" value="Bar">
-            <label> email </label> <input type="text" name="email" value="smbar@hello.com">
-            <label> phone </label> <input type="text" name="phone" value="760987299">
-            <label> address </label> <input type="text" name="address" value="700 Hedges Rd Encinitas, CA 92101">
-            </fieldset> 
-        <fieldset>
-            <input class="btn" type="submit" id="addGuest" value="Update Guest">
-            <input class="btn" type="button" value="cancel" onClick="browseGuests()">
-        </fieldset>
-    </form>
-</div>
+            <label> Select the Guest ID to Update</label> 
+            <select name="input_guest_id" id = "input_guest_id">
+                {{#each data}}
+                <option value="{{this.guest_id}}">{{this.guest_id}}</option>
+                {{/each}}
+            </select>
+                <label> first name </label> 
+                <input type="text" name="input_guest_first_name" id = "input_guest_first_name">
+                
+                <label> last name </label> 
+                <input type="text" name="input_guest_last_name" id = "input_guest_last_name">
 
-<p>&nbsp;</p>
-<div id="delete" style="display:none">
-    <form id="deleteGuest">
-        <legend><strong>Delete Guest</strong></legend>
-            <fieldset class="fields">
-            <p>Are you sure you want to delete the following Guest?</p>
-            <input type="hidden" name="GuestID" id="deleteGuest">
-            <label> ID: </label> 1
-            <label> name: </label>"Sara Bar"
+                <label> email </label> 
+                <input type="text" name="input_guest_email" id = "input_guest_email">
+
+                <label> phone </label> 
+                <input type="text" name="input_guest_phone" id = "input_guest_phone">
+
+                <label> address </label> 
+                <input type="text" name="input_guest_address" id = "input_guest_address">
             </fieldset> 
         <fieldset>
-            <input class="btn" type="submit" id="deleteGuest" value="Delete">
+            <input class="btn" type="submit" id="updateGuest" value="Update Guest">
             <input class="btn" type="button" value="cancel" onClick="browseGuests()">
         </fieldset>
     </form>
