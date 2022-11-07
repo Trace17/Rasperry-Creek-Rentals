@@ -1,3 +1,48 @@
+<html>
+    <head>
+        <title>Bookings</title>
+        <script language="Javascript">
+            function showform(dowhat){
+                if (dowhat == 'insert'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'block';
+                    document.getElementById('delete').style.display = 'none';
+                    document.getElementById('search').style.display = 'none';
+                }
+                else if (dowhat == 'update'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('update').style.display = 'block';
+                    document.getElementById('delete').style.display = 'none';
+                }
+                else if (dowhat == 'delete'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('delete').style.display = 'block';
+                    document.getElementById('search').style.display = 'none';
+                }
+                else if (dowhat == 'search'){
+                    document.getElementById('browse').style.display = 'none';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                    document.getElementById('search').style.display = 'block';
+                }
+                else {
+                    document.getElementById('browse').style.display = 'block';
+                    document.getElementById('insert').style.display = 'none';
+                    document.getElementById('delete').style.display = 'none';
+                    document.getElementById('search').style.display = 'none';
+
+                }
+            }
+            
+            function newBookings_Guest() { showform('insert');}
+            function updateBookings_Guest(bid) { showform('update');}
+            function deleteBookings_Guest(bid) { showform('delete');}
+            function browseBookings_Guest() { showform('browse');}
+        </script>
+    </head>
+
 <h1>Guests Bookings</h1>
 
 [ <a href="/">Home Page</a> |
@@ -14,6 +59,7 @@
 <table id = "bookings-guests-table" border="1" cellpadding="5">
 <thead>
     <tr>
+        <th><a href="#" onClick="showform('insert')">New</a></th>
         <th>guest</th>
         <th>booking id</th>
         <th>number of guests</th>
@@ -27,7 +73,8 @@
 
         {{!-- For each row, print the id, fname, lname, homeworld and age, in order --}}
         {{#each data}}
-        <tr>
+        <tr>   
+            <td><a href="/delete_bookings_guests/{{this.booking_id}}/{{this.guest_id}}">Delete</a></td>
             <td>{{this.name}}</td>
             <td>{{this.booking_id}}</td>
             <td>{{this.number_of_guests}}</td>
@@ -41,3 +88,32 @@
     </table>
 </div>
 
+
+
+
+    <p>&nbsp;</p>
+    <div id="insert" style="display:none">
+        <form id="add-booking-guest-form" method = "POST" action = "/add-booking-guest-form">
+            <legend><strong>Add Booking Guest</strong></legend>
+                <fieldset class="fields">
+                    <select name="input_guest_id" id = "input_guest_id">
+                    <option value="">Select a Guest</option>
+                    {{#each guests}}
+                    <option value="{{this.guest_id}}">{{this.guest_name}}</option>
+                    {{/each}}
+                    </select>
+                    <select name="input_booking_id" id = "input_booking_id">
+                    <option value="">Select a Booking ID</option>
+                    {{#each bookings}}
+                    <option value="{{this.booking_id}}">{{this.booking_id}}</option>
+                    {{/each}}
+                    </select>
+                 </fieldset> 
+            <fieldset>
+                <input class="btn" type="submit" id="addBookingGuest" value="Add Booking Guest">
+                <input class="btn" type="button" value="cancel" onClick="browseBookings_Guest()">
+            </fieldset>
+        </form>
+    </div>
+
+</html>

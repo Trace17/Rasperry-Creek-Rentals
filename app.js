@@ -39,7 +39,7 @@ app.get('/', function(req, res)                 // This is the basic syntax for 
 //Bookings_Guests display
 app.get('/bookings_guests', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query1 = "SELECT  CONCAT(Guests.first_name, ' ', Guests.last_name) as name, Bookings.booking_id, Bookings.number_of_guests as number_of_guests, Rentals.rental_name as rental_name, Bookings.check_in_date as check_in_date, Bookings.check_out_date as check_out_date from Bookings_Guests \
+        let query1 = "SELECT  Guests.guest_id, CONCAT(Guests.first_name, ' ', Guests.last_name) as name, Bookings.booking_id, Bookings.number_of_guests as number_of_guests, Rentals.rental_name as rental_name, Bookings.check_in_date as check_in_date, Bookings.check_out_date as check_out_date from Bookings_Guests \
         INNER JOIN Bookings \
         ON Bookings.booking_id = Bookings_Guests.booking_id \
         INNER JOIN Rentals \
@@ -47,9 +47,19 @@ app.get('/bookings_guests', function(req, res)                 // This is the ba
         INNER JOIN Guests \
         ON Bookings_Guests.guest_id = Guests.guest_id \
         ORDER BY booking_id ASC;";
-        db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
-            res.render('bookings_guests', {data: rows});                  // Render the bookings_guests.hbs file, and also send the renderer
+        let query2 = "SELECT CONCAT(first_name, ' ', last_name) as guest_name, guest_id FROM Guests;";
+
+        let query3 = "SELECT * FROM Bookings;";
+        db.pool.query(query1, function(error, rows, fields){   
+            let bookings_guests = rows // Execute the query
+            db.pool.query(query2, function(error, rows, fields){    
+                let guests = rows// Execute the query
+                db.pool.query(query3, function(error, rows, fields){ 
+                    let bookings = rows   // Execute the query
+                    res.render('bookings_guests', {data: bookings_guests, guests: guests, bookings: bookings});                  // Render the bookings_guests.hbs file, and also send the renderer
+                })                 // Render the bookings_guests.hbs file, and also send the renderer
+            })                // Render the bookings_guests.hbs file, and also send the renderer
         })    
     });  
 
@@ -393,6 +403,35 @@ app.post('/add-booking-form', function(req, res){
 })
 
 
+
+// Allows adding of new rental 
+app.post('/add-booking-guest-form', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let data = req.body;
+
+    // Capture NULL values (Does not work correctly) *************
+
+    // Create the query and run it on the database
+    query1 = `INSERT INTO Bookings_Guests (guest_id, booking_id) VALUES ("${data['input_guest_id']}", "${data['input_booking_id']}")`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/bookings_guests');
+        }
+    })
+})
+
 /*
 ---------- Delete functions (GET/DELETE) ----------
 */
@@ -535,6 +574,35 @@ app.get('/delete_bookings/:id', function(req, res){
     })
 })
 
+
+
+//delete for bookings_guests
+app.get('/delete_bookings_guests/:booking_id/:guest_id', function(req, res){
+    // Capture the incoming data and parse it back to a JS object
+    let booking = req.params.booking_id;
+    let guest = req.params.guest_id;
+  
+    // Create the query and run it on the database
+    query1 = `DELETE FROM Bookings_Guests WHERE booking_id = ${booking} AND guest_id = ${guest}`;
+    db.pool.query(query1, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {   
+            console.log(`successfully deleted bookings guest with Booking ID: ${booking} and GUEST ID: ${guest} `)
+            res.redirect('/bookings_guests')
+        }
+    })
+})
 
 /*
 ---------- Create Functions (POST) ----------
