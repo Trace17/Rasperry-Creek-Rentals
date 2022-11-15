@@ -6,6 +6,9 @@ FROM Bookings
 INNER JOIN Rentals
 ON Bookings.rental_id = Rentals.rental_id;
 
+-- Select queries for dropdowns
+SELECT booking_id FROM Bookings
+SELECT rental_name FROM Rentals
 
     -- insert booking
 INSERT INTO `Bookings` (`number_of_guests`, `rental_id`, `check_in_date`, `check_out_date`, `total_cost`)
@@ -29,6 +32,9 @@ SELECT * FROM Bookings WHERE id = :booking_id_input;
 -- Display all employees
 SELECT * FROM Employees;
 
+-- Select queries for dropdowns
+SELECT employee_id FROM Employees
+
     -- insert new employee
 INSERT INTO `Employees` (`first_name`, `last_name`, `email`, `phone`)
 VALUES (
@@ -50,6 +56,9 @@ DELETE FROM `Employees` WHERE `employee_id` = :employee_id_input;
 
 -- Display all guests
 SELECT * FROM Guests;
+
+-- Select queries for dropdowns
+SELECT guest_id FROM Guests
 
     -- insert new guest
 INSERT INTO `Guests` (`first_name`, `last_name`, `email`, `phone`, `address`)
@@ -78,6 +87,11 @@ SELECT rental_id, rental_name, Rental_Types.rental_type_name as rental_type_name
         INNER JOIN Employees 
         ON Rentals.employee_id = Employees.employee_id;
 
+-- Select queries for dropdowns
+SELECT rental_id FROM Rentals
+SELECT rental_type_name FROM Rental_Types
+SELECT first_name, last_name FROM Employees
+
     -- insert new rental
 INSERT INTO `Rentals` ( `rental_name`, `rental_type_id`, `employee_id`)
 VALUES (
@@ -96,7 +110,12 @@ DELETE FROM `Rentals` WHERE `rental_id` = :rental_id_input;
 -- Display all rental types
 SELECT * FROM Rental_types;
 
-    -- insert new rental type
+-- Select queries for dropdowns
+SELECT rental_type_id FROM Rentals_Types
+SELECT availability FROM Rental_Types
+
+
+ -- insert new rental type
 INSERT INTO `Rental_Types` ( `rental_name`, `rental_type_id`, `employee_id`)
 VALUES (
     :rental_type_name_input,
@@ -106,3 +125,18 @@ VALUES (
 );
     -- delete rental types
 DELETE FROM `Rental_Types` WHERE `rental_type_id` = :rental_type_id_input;
+
+---------------------------------------------------------------------------------------------------------------
+-- bookings_guests.html data manipulation code
+
+-- Display all from Bookings_Guests
+SELECT * FROM Bookings_Guests;
+
+    -- insert into bookings_guests
+INSERT INTO `Bookings_Guests` (`guest_id`, `booking_id`)
+VALUES (
+    :guest_id_input,
+    :booking_id_input,
+);
+    -- delete from Bookings_Guests
+DELETE FROM `Bookings_Guests WHERE `booking_id` = :booking_id_input AND `guest_id` = :guest_id_input
