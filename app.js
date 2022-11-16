@@ -7,7 +7,7 @@ var express = require('express');   // We are using the express library for the 
 var app     = express();            // We need to instantiate an express object to interact with the server in our code
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-PORT        = 9346;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 9333;                 // Set a port number at the top so it's easy to change in the future
 // Database
 var db = require('./database/db-connector')
 
@@ -110,6 +110,7 @@ app.get('/employees', function(req, res)                 // This is the basic sy
 app.get('/guests', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
         let query1 = "SELECT * FROM Guests;";
+        
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
 
             res.render('guests', {data: rows});                  // Render the guests.hbs file, and also send the renderer
@@ -165,9 +166,26 @@ app.post('/add-rental-form', function(req, res){
     let data = req.body;
 
     // Capture NULL values (Does not work correctly) *************
+    let rental_name = data['input_rental_name'];
+    if (rental_name.length === 0)
+    {
+        rental_name = "NULL"
+    }
+
+    let rental_type_id = parseInt(data['input_rental_type_id']); 
+    if (isNaN(rental_type_id))
+    {
+        rental_type_id = 'NULL'
+    }
+
+    let employee_id = parseInt(data['input_employee']); 
+    if (isNaN(employee_id))
+    {
+        employee_id = 'NULL'
+    }
 
     // Create the query and run it on the database
-    query1 = `INSERT INTO Rentals (rental_name, rental_type_id, employee_id) VALUES ("${data['input_rental_name']}", "${data['input_rental_type_id']}", ${data['input_employee_id']})`;
+    query1 = `INSERT INTO Rentals (rental_name, rental_type_id, employee_id) VALUES ("${rental_name}", "${rental_type_id}", "${employee_id}")`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -404,7 +422,7 @@ app.post('/add-booking-form', function(req, res){
 
 
 
-// Allows adding of new rental 
+// Allows adding of new Bookings_Guests 
 app.post('/add-booking-guest-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
