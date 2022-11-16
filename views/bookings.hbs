@@ -99,18 +99,18 @@
         <form id="add-booking-form" method = "POST" action = "/add-booking-form">
             <legend><strong>Add Booking</strong></legend>
                 <fieldset class="fields">
-                    <label> number of guests </label> <input type="number" name="input_number_of_guests" id = "input_number_of_guests">
+                    <label> number of guests </label> <input type="number" name="input_number_of_guests" id = "input_number_of_guests" required>
                     <label> rental id </label>
-                    <select name="input_rental" id = "input_rental">
+                    <select name="input_rental" id = "input_rental" required>
                     <option value="">Select a Rental</option>
                     {{#each rentals}}
                     <option value="{{this.rental_id}}">{{this.rental_name}}</option>
                     {{/each}}
                     </select>
                 
-                    <label> check in </label> <input type="date" name="input_check_in_date" id = "input_check_in_date">
-                    <label> check out </label> <input type="date" name="input_check_out_date" id = "input_check_out_date">
-                    <label> total cost </label> <input type="number" step="any" name="input_total_cost" id = "input_total_cost">
+                    <label> check in </label> <input type="date" name="input_check_in_date" id = "input_check_in_date" required>
+                    <label> check out </label> <input type="date" name="input_check_out_date" id = "input_check_out_date" required>
+                    <label> total cost </label> <input type="number" step="any" name="input_total_cost" id = "input_total_cost" required>
                 </fieldset> 
             <fieldset>
                 <input class="btn" type="submit" id="addBooking" value="Add Booking">
@@ -126,23 +126,23 @@
             <legend><strong>Update Booking</strong></legend>
                 <fieldset class="fields">
                 <label> Select the Booking ID to Update</label>
-                <select name="input_booking_id" id = "input_booking_id">
+                <select name="input_booking_id" id = "input_booking_id" required>
                 {{#each data}}
                 <option value="{{this.booking_id}}">{{this.booking_id}}</option>
                 {{/each}}
                 </select>
-                    <label> number of guests </label> <input type="number" name="input_number_of_guests" id = "input_number_of_guests">
+                    <label> number of guests </label> <input type="number" name="input_number_of_guests" id = "input_number_of_guests" required>
                     <label> rental name </label>
-                    <select name="input_rental" id = "input_rental">
+                    <select name="input_rental" id = "input_rental" required>
                     <option value="">Select a Rental</option>
                     {{#each rentals}}
                     <option value="{{this.rental_id}}">{{this.rental_name}}</option>
                     {{/each}}
                     </select>
                 
-                    <label> check in </label> <input type="date" name="input_check_in_date" id = "input_check_in_date">
-                    <label> check out </label> <input type="date" name="input_check_out_date" id = "input_check_out_date">
-                    <label> total cost </label> <input type="number" step="any" name="input_total_cost" id = "input_total_cost">
+                    <label> check in </label> <input type="date" name="input_check_in_date" id = "input_check_in_date" required>
+                    <label> check out </label> <input type="date" name="input_check_out_date" id = "input_check_out_date" required>
+                    <label> total cost </label> <input type="number" step="any" name="input_total_cost" id = "input_total_cost" required>
                 </fieldset> 
             <fieldset>
                 <input class="btn" type="submit" id="updateBooking" value="Update Booking">
@@ -177,7 +177,7 @@
             <legend><strong>Search for a Booking</strong></legend>
                 <fieldset class="fields">
                 <p>Provide the ID of the booking you are searching for:</p>
-                <label> id </label> <input type="number" name="booking_id" id = "booking_id">
+                <label> id </label> <input type="number" name="booking_id" id = "booking_id" required>
                 </fieldset> 
             <fieldset>
                 <input class="btn" type="submit" id="searchBookings" value="Search">
