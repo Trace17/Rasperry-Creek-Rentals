@@ -89,16 +89,16 @@
         <legend><strong>Add Employee</strong></legend>
             <fieldset class="fields">
                 <label> first name </label> 
-                <input type="text" name="input_employee_first_name" id = "input_employee_first_name">
+                <input type="text" name="input_employee_first_name" id = "input_employee_first_name" required>
                 
                 <label> last name </label> 
-                <input type="text" name="input_employee_last_name" id = "input_employee_last_name">
+                <input type="text" name="input_employee_last_name" id = "input_employee_last_name" required>
 
                 <label> email </label> 
-                <input type="text" name="input_employee_email" id = "input_employee_email">
+                <input type="text" name="input_employee_email" id = "input_employee_email" required>
 
                 <label> phone </label> 
-                <input type="text" name="input_employee_phone" id = "input_employee_phone">
+                <input type="text" name="input_employee_phone" id = "input_employee_phone" required>
             </fieldset> 
         <fieldset>
             <input class="btn" type="submit" id="addEmployee" value="Add Employee">
@@ -115,22 +115,22 @@
         <legend><strong>Update Employee</strong></legend>
             <fieldset class="fields">
             <label> Select the Employee ID to Update</label> 
-            <select name="input_employee_id" id = "input_employee_id">
+            <select name="input_employee_id" id = "input_employee_id" required>
                 {{#each data}}
                 <option value="{{this.employee_id}}">{{this.employee_id}}</option>
                 {{/each}}
             </select>
                 <label> first name </label> 
-                <input type="text" name="input_employee_first_name" id = "input_employee_first_name">
+                <input type="text" name="input_employee_first_name" id = "input_employee_first_name" required>
                 
                 <label> last name </label> 
-                <input type="text" name="input_employee_last_name" id = "input_employee_last_name">
+                <input type="text" name="input_employee_last_name" id = "input_employee_last_name" required>
 
                 <label> email </label> 
-                <input type="text" name="input_employee_email" id = "input_employee_email">
+                <input type="text" name="input_employee_email" id = "input_employee_email" required>
 
                 <label> phone </label> 
-                <input type="text" name="input_employee_phone" id = "input_employee_phone">
+                <input type="text" name="input_employee_phone" id = "input_employee_phone" required>
             </fieldset> 
         <fieldset>
             <input class="btn" type="submit" id="updateEmployee" value="Update Employee">
