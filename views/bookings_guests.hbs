@@ -96,13 +96,13 @@
         <form id="add-booking-guest-form" method = "POST" action = "/add-booking-guest-form">
             <legend><strong>Add Booking Guest</strong></legend>
                 <fieldset class="fields">
-                    <select name="input_guest_id" id = "input_guest_id">
+                    <select name="input_guest_id" id = "input_guest_id" required>
                     <option value="">Select a Guest</option>
                     {{#each guests}}
                     <option value="{{this.guest_id}}">{{this.guest_name}}</option>
                     {{/each}}
                     </select>
-                    <select name="input_booking_id" id = "input_booking_id">
+                    <select name="input_booking_id" id = "input_booking_id" required>
                     <option value="">Select a Booking ID</option>
                     {{#each bookings}}
                     <option value="{{this.booking_id}}">{{this.booking_id}}</option>
