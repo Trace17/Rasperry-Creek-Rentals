@@ -85,12 +85,12 @@
         <legend><strong>Add Rental Type</strong></legend>
             <fieldset class="fields">
                 <label> name </label> 
-                <input type="text" name="input_rental_type_name" id = "input_rental_type_name">
+                <input type="text" name="input_rental_type_name" id = "input_rental_type_name" required>
 
                 <label> availability </label> 
                 
                 {{!-- {{Select for rental type drop down}} --}}
-                <select name="input_availability" id = "input_availability">
+                <select name="input_availability" id = "input_availability" required>
                     <option value="">Select an availability</option>
                     <option value =Year Round> Year Round</option>
                     <option value =Summer> Summer</option>
@@ -100,10 +100,10 @@
                 </select>
                 
                 <label> occupancy </label> 
-                <input type="number" name="input_occupancy" id = "input_occupancy">
+                <input type="number" name="input_occupancy" id = "input_occupancy" required>
 
                 <label> cost per night </label> 
-                <input type="number" name="input_cost_per_night" id = "input_cost_per_night">
+                <input type="number" name="input_cost_per_night" id = "input_cost_per_night" required>
             </fieldset> 
         <fieldset>
             <input class="btn" type="submit" id="addRentalType" value="Add Rental Type">
@@ -122,18 +122,18 @@
         <legend><strong>Update Rental Type</strong></legend>
             <fieldset class="fields">
             <label> Select the Rental Type ID to Update</label> 
-            <select name="input_rental_type_id" id = "input_rental_type_id">
+            <select name="input_rental_type_id" id = "input_rental_type_id" required>
                 {{#each data}}
                 <option value="{{this.rental_type_id}}">{{this.rental_type_id}}</option>
                 {{/each}}
             </select>
                 <label> name </label> 
-                <input type="text" name="input_rental_type_name" id = "input_rental_type_name">
+                <input type="text" name="input_rental_type_name" id = "input_rental_type_name" required>
 
                 <label> availability </label> 
                 
                 {{!-- {{Select for rental type drop down}} --}}
-                <select name="input_availability" id = "input_availability">
+                <select name="input_availability" id = "input_availability" required>
                     <option value="">Select an availability</option>
                     <option value ="Year Round"> Year Round</option>
                     <option value ="Summer"> Summer</option>
@@ -143,10 +143,10 @@
                 </select>
                 
                 <label> occupancy </label> 
-                <input type="number" name="input_occupancy" id = "input_occupancy">
+                <input type="number" name="input_occupancy" id = "input_occupancy" required>
 
                 <label> cost per night </label> 
-                <input type="number" name="input_cost_per_night" id = "input_cost_per_night">
+                <input type="number" name="input_cost_per_night" id = "input_cost_per_night" required>
             </fieldset> 
         <fieldset>
             <input class="btn" type="submit" id="updateRentalType" value="Update Rental Type">
