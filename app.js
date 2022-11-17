@@ -135,7 +135,7 @@ app.get('/rentals', function(req, res)                 // This is the basic synt
         let query1 = "SELECT rental_id, rental_name, Rental_Types.rental_type_name as rental_type_name, CONCAT(Employees.first_name, ' ', Employees.last_name) as name from Rentals \
         INNER JOIN Rental_Types \
         ON Rentals.rental_Type_id = Rental_Types.rental_type_id \
-        INNER JOIN Employees \
+        LEFT OUTER JOIN Employees \
         ON Rentals.employee_id = Employees.employee_id \
         ORDER BY rental_id ASC;";
 
@@ -150,7 +150,7 @@ app.get('/rentals', function(req, res)                 // This is the basic synt
                 db.pool.query(query3, function(error, rows, fields){    // Execute the query
                     let employees = rows;
                     res.render('rentals', {data: rentals, rental_types: rental_types, employees: employees});                  // Render the rentals.hbs file, and also send the renderer
-                })                 // Render the rentals.hbs file, and also send the renderer
+            })                 // Render the rentals.hbs file, and also send the renderer
             })               // Render the rentals.hbs file, and also send the renderer
         })    
     });    
@@ -184,25 +184,46 @@ app.post('/add-rental-form', function(req, res){
         employee_id = 'NULL'
     }
 
+
     // Create the query and run it on the database
     query1 = `INSERT INTO Rentals (rental_name, rental_type_id, employee_id) VALUES ("${rental_name}", "${rental_type_id}", "${employee_id}")`;
-    db.pool.query(query1, function(error, rows, fields){
+    query2 = `INSERT INTO Rentals (rental_name, rental_type_id) VALUES ("${rental_name}", "${rental_type_id}")`;
+    if (employee_id !== 'NULL'){
+        db.pool.query(query1, function(error, rows, fields){
 
-        // Check to see if there was an error
-        if (error) {
+            // Check to see if there was an error
+            if (error) {
 
-            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
-            console.log(error)
-            res.sendStatus(400);
-        }
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error)
+                res.sendStatus(400);
+            }
 
-        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
-        // presents it on the screen
-        else
-        {
-            res.redirect('rentals');
-        }
-    })
+            // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+            // presents it on the screen
+            else
+            {
+                res.redirect('rentals');
+            }
+        })}
+    else{
+        db.pool.query(query2, function(error, rows, fields){
+
+            // Check to see if there was an error
+            if (error) {
+
+                // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+                console.log(error)
+                res.sendStatus(400);
+            }
+
+            // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+            // presents it on the screen
+            else
+            {
+                res.redirect('rentals');
+            }
+        })}
 })
 
 
