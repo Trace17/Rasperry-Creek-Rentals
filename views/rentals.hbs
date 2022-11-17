@@ -87,12 +87,12 @@
         <legend><strong>Add Rental</strong></legend>
             <fieldset class="fields">
                 <label> name </label> 
-                <input type="text" name="input_rental_name" id = "input_rental_name">
+                <input type="text" name="input_rental_name" id = "input_rental_name" required>
 
                 <label> rental type id </label> 
                 
                 {{!-- {{Select for rental dynamic drop down}} --}}
-                <select name="input_rental_type_id" id = "input_rental_type_id">
+                <select name="input_rental_type_id" id = "input_rental_type_id" required>
                     <option value="">Select a Rental Type</option>
                     {{#each rental_types}}
                     <option value="{{this.rental_type_id}}">{{this.rental_type_name}}</option>
@@ -104,6 +104,7 @@
                     {{#each employees}}
                     <option value="{{this.employee_id}}">{{this.name}}</option>
                     {{/each}}
+                    <option value="">No Employee</option>
                 </select>
             </fieldset> 
         <fieldset>
@@ -122,19 +123,19 @@
         <legend><strong>Update Rental</strong></legend>
             <fieldset class="fields">
             <label> Select the rental ID to update</label> 
-            <select name="input_rental_id" id = "input_rental_id">
+            <select name="input_rental_id" id = "input_rental_id" required>
                 {{#each data}}
                 <option value="{{this.rental_id}}">{{this.rental_id}}</option>
                 {{/each}}
             </select>
 
                 <label> Rental Name </label> 
-                <input type="text" name="input_rental_name" id = "input_rental_name">
+                <input type="text" name="input_rental_name" id = "input_rental_name" required>
 
                 <label> Rental Type </label> 
                 
                 {{!-- {{Select for rental dynamic drop down}} --}}
-                <select name="input_rental_type_id" id = "input_rental_type_id">
+                <select name="input_rental_type_id" id = "input_rental_type_id" required>
                     <option value="">Select a Rental Type</option>
                     {{#each rental_types}}
                     <option value="{{this.rental_type_id}}">{{this.rental_type_name}}</option>
@@ -142,11 +143,12 @@
                 </select>
                 
                 <label> Employee </label> 
-                <select name="input_employee" id = "input_employee">
+                <select name="input_employee" id = "input_employee" required>
                     <option value="">Select an Employee</option>
                     {{#each employees}}
                     <option value="{{this.employee_id}}">{{this.name}}</option>
                     {{/each}}
+                    <option value="">No Employee</option>
                 </select>
             </fieldset> 
         <fieldset>
