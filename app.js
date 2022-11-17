@@ -656,6 +656,13 @@ app.post('/update-rental-form', function(req, res){
 
     // Create the query and run it on the database
     query1 = `UPDATE Rentals SET rental_name = "${data['input_rental_name']}", rental_type_id = ${data['input_rental_type_id']}, employee_id = ${data['input_employee']} WHERE rental_id = ${data['input_rental_id']};`;
+    query2 = `UPDATE Rentals SET rental_name = "${data['input_rental_name']}", rental_type_id = ${data['input_rental_type_id']}, employee_id = NULL WHERE rental_id = ${data['input_rental_id']};`;
+    let employee_id = parseInt(data['input_employee']); 
+    if (isNaN(employee_id))
+    {
+        employee_id = 'NULL'
+    }
+    if (employee_id !== 'NULL'){
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -672,7 +679,25 @@ app.post('/update-rental-form', function(req, res){
         {
             res.redirect('/rentals');
         }
+    })}
+    else{db.pool.query(query2, function(error, rows, fields){
+
+        // Check to see if there was an error
+        if (error) {
+
+            // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
+            console.log(error)
+            res.sendStatus(400);
+        }
+
+        // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
+        // presents it on the screen
+        else
+        {
+            res.redirect('/rentals');
+        }
     })
+    }
 })
 
 
