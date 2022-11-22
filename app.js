@@ -39,7 +39,7 @@ app.get('/', function(req, res)                 // This is the basic syntax for 
 //Bookings_Guests display
 app.get('/bookings_guests', function(req, res)                 // This is the basic syntax for what is called a 'route'
     {
-        let query1 = "SELECT  Guests.guest_id, CONCAT(Guests.first_name, ' ', Guests.last_name) as name, Bookings.booking_id, Bookings.number_of_guests as number_of_guests, Rentals.rental_name as rental_name, Bookings.check_in_date as check_in_date, Bookings.check_out_date as check_out_date from Bookings_Guests \
+        let query1 = "SELECT  Guests.guest_id, CONCAT(Guests.first_name, ' ', Guests.last_name) as name, Bookings.booking_id, Bookings.number_of_guests as number_of_guests, Rentals.rental_name as rental_name, date_format(Bookings.check_in_date, '%M %D %Y') as check_in_date, date_format(Bookings.check_out_date, '%M %D %Y') as check_out_date from Bookings_Guests \
         INNER JOIN Bookings \
         ON Bookings.booking_id = Bookings_Guests.booking_id \
         INNER JOIN Rentals \
@@ -70,14 +70,14 @@ app.get('/bookings', function(req, res)                 // This is the basic syn
         let query1;
         if (req.query.booking_id === undefined)
         { 
-            query1 = "SELECT booking_id, number_of_guests, Rentals.rental_name as rental_name, check_in_date, check_out_date, total_cost \
+            query1 = 'SELECT booking_id, number_of_guests, Rentals.rental_name as rental_name, date_format(check_in_date, "%M %D %Y") as check_in_date, date_format(check_out_date, "%M %D %Y") as check_out_date, total_cost \
         FROM Bookings \
         INNER JOIN Rentals \
-        ON Bookings.rental_id = Rentals.rental_id;";
+        ON Bookings.rental_id = Rentals.rental_id;';
         }
         else 
         {
-            query1 = `SELECT booking_id, number_of_guests, Rentals.rental_name as rental_name, check_in_date, check_out_date, total_cost \
+            query1 = `SELECT booking_id, number_of_guests, Rentals.rental_name as rental_name, date_format(check_in_date, "%M %D %Y") as check_in_date, date_format(check_out_date, "%M %D %Y") as check_out_date, total_cost \
             FROM Bookings \
             INNER JOIN Rentals \
             ON Bookings.rental_id = Rentals.rental_id \
