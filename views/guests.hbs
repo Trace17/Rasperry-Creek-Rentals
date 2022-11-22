@@ -125,7 +125,7 @@
         <legend><strong>Update Guest</strong></legend>
             <fieldset class="fields">
             <label> Select the Guest ID to Update</label> 
-            <select name="input_guest_id" id = "input_guest_id">
+            <select name="input_guest_id" id = "input_guest_id" required>
                 {{#each data}}
                 <option value="{{this.guest_id}}">{{this.guest_id}}</option>
                 {{/each}}
