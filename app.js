@@ -83,7 +83,7 @@ app.get('/bookings', function(req, res)                 // This is the basic syn
             ON Bookings.rental_id = Rentals.rental_id \
             WHERE booking_id LIKE "${req.query.booking_id}%";`;
         }
-
+        
         let query2 = "SELECT * FROM Rentals"
         db.pool.query(query1, function(error, rows, fields){    // Execute the query
             let bookings = rows
@@ -420,8 +420,10 @@ app.post('/add-booking-form', function(req, res){
         total_cost = 'NULL'
     }
 
+    let check_in_date = data['input_check_in_date'];
+
     // Create the query and run it on the database
-    query1 = `INSERT INTO Bookings (number_of_guests, rental_id, check_in_date, check_out_date, total_cost) VALUES (${number_of_guests}, ${rental}, "${data['input_check_in_date']}", "${data['input_check_out_date']}", ${total_cost})`;
+    query1 = `INSERT INTO Bookings (number_of_guests, rental_id, check_in_date, check_out_date, total_cost) VALUES (${number_of_guests}, ${rental}, "${check_in_date}", "${data['input_check_out_date']}", ${total_cost})`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
@@ -792,11 +794,12 @@ app.post('/update-employee-form', function(req, res){
 app.post('/update-booking-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-
+    let check_in_date = data['input_check_in_date']
+    let check_out_date = data['input_check_out_date']
     // Capture NULL values (Does not work correctly) *************
 
     // Create the query and run it on the database 
-    query1 = `UPDATE Bookings SET number_of_guests = ${data['input_number_of_guests']}, rental_id = ${data['input_rental']}, check_in_date = ${data['input_check_in_date']}, check_out_date = ${data['input_check_out_date']}, total_cost = ${data['input_total_cost']} WHERE booking_id = ${data['input_booking_id']};`;
+    query1 = `UPDATE Bookings SET number_of_guests = ${data['input_number_of_guests']}, rental_id = ${data['input_rental']}, check_in_date = "${check_in_date}", check_out_date = "${check_out_date}", total_cost = ${data['input_total_cost']} WHERE booking_id = ${data['input_booking_id']};`;
     db.pool.query(query1, function(error, rows, fields){
 
         // Check to see if there was an error
