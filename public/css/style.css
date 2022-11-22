@@ -1,0 +1,80 @@
+body {
+    background-color: #146919;
+    color: white;
+    text-align: center;
+}
+
+h1 {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a {
+    color: white;
+    background-color: #146919;
+    transition: background-color 0.5s;
+}
+
+a:hover {
+    color: rgb(0, 183, 255);
+    background-color: gold;
+}
+
+
+table {
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid;
+    width: 50%;
+    text-align: center;
+}
+
+th {
+    color: gold;
+    font-weight: bold;
+}
+
+.nav-bar {
+    background-color: rgba(21, 250, 90, 0.87);
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    border-style: double;
+    border-color: rgb(203, 238, 86);
+    border-width: 10px;
+
+}
+
+.nav-bar a {
+    float: left;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    border-bottom: 3px solid transparent;
+}
+
+.nav-bar a:hover {
+    border: 3px solid rgb(160, 3, 84);
+
+}
+
+.nav-bar a:active {
+    border-bottom: 3px solid rgb(160, 3, 3);
+}
+
+.top-part {
+    background-color: rgb(208, 14, 98);
+    color: white;
+    padding-top: 10px;
+}
+
+.top-part h1 {
+    text-shadow: #062769;
+}
+
+.index-container {
+    padding-top: 50px;
+}
