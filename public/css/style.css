@@ -65,16 +65,8 @@ th {
     border-bottom: 3px solid rgb(160, 3, 3);
 }
 
-.top-part {
+.top {
     background-color: rgb(208, 14, 98);
     color: white;
     padding-top: 10px;
-}
-
-.top-part h1 {
-    text-shadow: #062769;
-}
-
-.index-container {
-    padding-top: 50px;
 }
