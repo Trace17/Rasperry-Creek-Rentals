@@ -8,7 +8,7 @@ var app     = express();            // We need to instantiate an express object 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-PORT        = 9393;                 // Set a port number at the top so it's easy to change in the future
+PORT        = 9354;                 // Set a port number at the top so it's easy to change in the future
 // Database
 var db = require('./database/db-connector')
 
@@ -738,8 +738,6 @@ app.post('/update-guest-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values (Does not work correctly) *************
-
     // Create the query and run it on the database 
     query1 = `UPDATE Guests SET first_name = "${data['input_guest_first_name']}", last_name = "${data['input_guest_last_name']}", email = "${data['input_guest_email']}", phone = "${data['input_guest_phone']}", address = "${data['input_guest_address']}" WHERE guest_id = ${data['input_guest_id']};`;
     db.pool.query(query1, function(error, rows, fields){
@@ -766,8 +764,6 @@ app.post('/update-guest-form', function(req, res){
 app.post('/update-employee-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-
-    // Capture NULL values (Does not work correctly) *************
 
     // Create the query and run it on the database 
     query1 = `UPDATE Employees SET first_name = "${data['input_employee_first_name']}", last_name = "${data['input_employee_last_name']}", email = "${data['input_employee_email']}", phone = "${data['input_employee_phone']}" WHERE employee_id = ${data['input_employee_id']};`;
