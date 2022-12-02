@@ -8,22 +8,22 @@
     sections of code which was adapted, or based on code from this application.
 
     Citation for all ROUTEs
-    Date: 12/02/2020
+    Date: 11/15/2022
     Adapted from:
     https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data
 
     Citation for all ADDs
-    Date: 12/02/2020
+    Date: 11/16/2022
     Adapted from:
     https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
     
     Citation for all DELETEs
-    Date: 12/02/2020
+    Date: 11/19/2022
     Adapted from:
     https://stackoverflow.com/questions/59844397/node-js-delete-from-database-dependent-on-button-click
 
     Citation for all UPDATEs
-    Date: 12/02/2020
+    Date: 11/20/2022
     Adapted from and based on code from the following links:
     https://www.mysqltutorial.org/mysql-nodejs/update/
     https://www.w3schools.com/nodejs/nodejs_mysql_update.asp
