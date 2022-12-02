@@ -1,10 +1,41 @@
 // App.js
 
-//Citations: 
-// Citation for the following function
-// Date: 12/02/2020
-// Copied from/ Adapted from/ Based from:
-// link
+/*
+    CITATIONS
+
+    This application was heavily inspired from and many code portions adapted from
+    the CS340 node.js starter app. The following are specific citations for labeled
+    sections of code which was adapted, or based on code from this application.
+
+    Citation for all ROUTEs
+    Date: 12/02/2020
+    Adapted from:
+    https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%204%20-%20Dynamically%20Displaying%20Data
+
+    Citation for all ADDs
+    Date: 12/02/2020
+    Adapted from:
+    https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%205%20-%20Adding%20New%20Data
+    
+    Citation for all DELETEs
+    Date: 12/02/2020
+    Adapted from:
+    https://stackoverflow.com/questions/59844397/node-js-delete-from-database-dependent-on-button-click
+
+    Citation for all UPDATEs
+    Date: 12/02/2020
+    Adapted from and based on code from the following links:
+    https://www.mysqltutorial.org/mysql-nodejs/update/
+    https://www.w3schools.com/nodejs/nodejs_mysql_update.asp
+    https://stackoverflow.com/questions/14992879/node-js-mysql-query-syntax-issues-update-where
+
+    Citation for all HBS files
+    Date: 11/15/2022
+    Adapted from:
+    https://github.com/osu-cs340-ecampus/nodejs-starter-app/tree/main/Step%203%20-%20Integrating%20a%20Templating%20Engine%20(Handlebars)
+
+
+*/
 
 /*
     SETUP
@@ -177,7 +208,7 @@ app.post('/add-rental-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values (Does not work correctly) *************
+    // Capture NULL values 
     let rental_name = data['input_rental_name'];
     if (rental_name.length === 0)
     {
@@ -244,7 +275,7 @@ app.post('/add-guest-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values (Does not work correctly) *************
+    // Capture NULL values 
 
     let guest_first_name = data['input_guest_first_name'];
     if (guest_first_name.length === 0)
@@ -304,7 +335,7 @@ app.post('/add-rental-types-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values (Does not work correctly) *************
+    // Capture NULL values 
 
     let rental_type_name = data['input_rental_type_name'];
     if (rental_type_name.length === 0)
@@ -358,7 +389,7 @@ app.post('/add-employee-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values (Does not work correctly) *************
+    // Capture NULL values 
 
     let employee_first_name = data['input_employee_first_name'];
     if (employee_first_name.length === 0)
@@ -407,12 +438,12 @@ app.post('/add-employee-form', function(req, res){
 })
 
 
-// Allows the addition of a new booking  *************** Booking Date not working
+// Allows the addition of a new booking  
 app.post('/add-booking-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values (Does not work correctly) *************
+    // Capture NULL values 
 
     let number_of_guests = parseInt(data['input_number_of_guests']);
     if (isNaN(number_of_guests))
@@ -462,7 +493,7 @@ app.post('/add-booking-guest-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values (Does not work correctly) *************
+    // Capture NULL values 
 
     // Create the query and run it on the database
     query1 = `INSERT INTO Bookings_Guests (guest_id, booking_id) VALUES ("${data['input_guest_id']}", "${data['input_booking_id']}")`;
@@ -572,7 +603,7 @@ app.get('/delete_guests/:id', function(req, res){
 })
 
 
-//employees
+//delete for employees
 app.get('/delete_employees/:id', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.params.id;
@@ -666,7 +697,6 @@ app.post('/update-rental-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
 
-    // Capture NULL values (Does not work correctly) *************
 
     // Create the query and run it on the database
     query1 = `UPDATE Rentals SET rental_name = "${data['input_rental_name']}", rental_type_id = ${data['input_rental_type_id']}, employee_id = ${data['input_employee']} WHERE rental_id = ${data['input_rental_id']};`;
@@ -719,8 +749,6 @@ app.post('/update-rental-form', function(req, res){
 app.post('/update-rental-types-form', function(req, res){
     // Capture the incoming data and parse it back to a JS object
     let data = req.body;
-
-    // Capture NULL values (Does not work correctly) *************
 
     // Create the query and run it on the database 
     query1 = `UPDATE Rental_Types SET rental_type_name = "${data['input_rental_type_name']}", availability = "${data['input_availability']}", occupancy = ${data['input_occupancy']}, cost_per_night = ${data['input_cost_per_night']} WHERE rental_type_id = ${data['input_rental_type_id']};`;
@@ -804,7 +832,6 @@ app.post('/update-booking-form', function(req, res){
     let data = req.body;
     let check_in_date = data['input_check_in_date']
     let check_out_date = data['input_check_out_date']
-    // Capture NULL values (Does not work correctly) *************
 
     // Create the query and run it on the database 
     query1 = `UPDATE Bookings SET number_of_guests = ${data['input_number_of_guests']}, rental_id = ${data['input_rental']}, check_in_date = "${check_in_date}", check_out_date = "${check_out_date}", total_cost = ${data['input_total_cost']} WHERE booking_id = ${data['input_booking_id']};`;
