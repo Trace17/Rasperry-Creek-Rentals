@@ -1,5 +1,11 @@
 // App.js
 
+//Citations: 
+// Citation for the following function
+// Date: 12/02/2020
+// Copied from/ Adapted from/ Based from:
+// link
+
 /*
     SETUP
 */
@@ -36,6 +42,11 @@ app.get('/', function(req, res)                 // This is the basic syntax for 
         res.render('index');                    //Render the  index.hs
     });                                         // requesting the web site.
 
+//Error Page Display    
+app.get('/error_page', function(req, res)                 // This is the basic syntax for what is called a 'route'
+    {
+        res.render('error_page');                    //Render the  index.hs
+    });    
 
 //Bookings_Guests display
 app.get('/bookings_guests', function(req, res)                 // This is the basic syntax for what is called a 'route'
@@ -491,7 +502,7 @@ app.get('/delete_rentals/:id', function(req, res){
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error)
-            res.sendStatus(400);
+            res.redirect('/error_page');
         }
 
         // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
@@ -519,7 +530,7 @@ app.get('/delete_rental_types/:id', function(req, res){
 
             // Log the error to the terminal so we know what went wrong, and send the visitor an HTTP response 400 indicating it was a bad request.
             console.log(error)
-            res.sendStatus(400);
+            res.redirect('/error_page');
         }
 
         // If there was no error, we redirect back to our root route, which automatically runs the SELECT * FROM bsg_people and
