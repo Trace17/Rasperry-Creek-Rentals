@@ -1,4 +1,4 @@
-# cs340 group50 project
+# cs340 group50 project: Rasberry Creek Village Web Application
 ## Final Portfolio Project for CS340 Databases at Oregon State University
 ### Authors: Trace Sweeney and Brenda Levy
 
